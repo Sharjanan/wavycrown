@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+.hero-bg {
+  background-image: url("/sky_2.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
