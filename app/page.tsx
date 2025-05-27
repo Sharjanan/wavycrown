@@ -5,10 +5,40 @@ import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/components/LanguageContext";
 import { translations } from "@/components/lang";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { useState } from "react";
 
 export default function Home() {
     const { lang } = useLanguage();
   const t = translations.home;
+const [open, setOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState<string | null>(null);
+const services = [
+    {
+      title: t.house_call[lang],
+      price: "$100",
+      link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/W2QHA46QPMZ67V44ZLQSX3KR",
+    },
+    {
+      title: t.after_hours[lang],
+      price: "$50",
+      link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/EU2ZSC6VZHKC6S4VDE2EDQFC",
+    },
+    {
+      title: t.haircut[lang],
+      price: "$30",
+      link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/7DFEQNSC5A4GCUFO3SABTR2J",
+    },
+    {
+      title: t.haircut_beard[lang],
+      price: "$35",
+      link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/H6VBVZR5WK6L2AV25LFMZYTE",
+    },
+  ];
+   const handleOpen = (link: string) => {
+    setActiveLink(link);
+    setOpen(true);
+  };
 
   return (
     <main className="min-h-screen bg-white text-gray-900">
@@ -41,7 +71,7 @@ export default function Home() {
     </p>
     <a href="#booking">
       <button className="bg-gold text-black px-6 py-3 text-lg font-medium rounded hover:bg-yellow-400 transition">
-        Book Now
+        {t.button[lang]}
       </button>
     </a>
   </motion.div>
@@ -51,12 +81,12 @@ export default function Home() {
       <section className="py-16 px-4 sm:px-8 bg-gray-50" id="services">
         <h2 className="text-3xl font-semibold text-center mb-10">Our Services</h2>
         <div className="grid sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {[
-            { title: "Haircut", price: "$25" },
-            { title: "Skin Fade", price: "$30" },
-            { title: "Haircut + Beard", price: "$35" },
-          ].map((service, i) => (
-            <Card key={i}>
+          {services.map((service, i) => (
+            <Card 
+            key={i}
+            className="cursor-pointer hover:shadow-xl transition"
+            onClick={() =>  handleOpen(service.link)}
+            >
               <CardContent className="p-6 text-center">
                 <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
                 <p className="text-gray-500 text-lg">{service.price}</p>
@@ -64,6 +94,19 @@ export default function Home() {
             </Card>
           ))}
         </div>
+        
+      {/* Booking Modal */}
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="w-[95vw] h-[95vh] max-w-none max-h-none p-0 overflow-hidden">
+          {activeLink && (
+            <iframe
+              src={activeLink}
+              title="Square Booking"
+              className="w-full h-full border-none"
+            />
+          )}
+        </DialogContent>
+      </Dialog>
       </section>
 
       {/* Square Booking Embed */}
@@ -75,7 +118,7 @@ export default function Home() {
             title="Book Appointment"
             style={{
               width: "100%",
-              height: "800px",
+              height: "100%",
               border: "none",
               borderRadius: "12px",
             }}

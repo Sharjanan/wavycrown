@@ -46,6 +46,7 @@ export default function Navbar() {
         </Link>
 
         <nav className="flex items-center space-x-4 text-gold font-bold uppercase">
+          <Link href="/calendar" className="hover:underline">Calendar</Link>
           <Link href="#services" className="hover:underline">Services</Link>
           <Link href="#booking" className="hover:underline">{
             lang === "en" ? "Book Now" : "Réserver"

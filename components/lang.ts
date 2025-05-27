@@ -13,6 +13,22 @@ export const translations = {
       en: "Book Now",
       fr: "Réserver maintenant",
     },
+    house_call: {
+      en: "HOUSE CALL!!! Service at your comfort📱",
+      fr: "DOMICILE!!! Service à votre confort📱",
+    },
+    after_hours: {
+      en: "After Hours⏱!!!",
+      fr: "Après la Fermeture⏱!!!",
+    },
+    haircut: {
+      en: "HAIR CUT (TEENAGE/MEN'S/KIDS)",
+      fr: "COUPE (ADOLESCENT/HOMME/ENFANT)",
+  },
+    haircut_beard: {
+      en: "Haircut & Beard",
+      fr: "Coupe de Cheveux & Barbe",
+    },
   },
   navbar: {
     services: {
@@ -24,5 +40,4 @@ export const translations = {
       fr: "Réserver",
     },
   },
-  // You can keep expanding with more sections
 };
