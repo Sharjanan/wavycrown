@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
-const letters = "WAVYCROWN".split("");
+const letters = "LOADING".split("");
 
 export default function LoadingScreen() {
   const [visibleLetters, setVisibleLetters] = useState(0);
@@ -49,7 +49,7 @@ export default function LoadingScreen() {
             height={250}
             className="mb-6"
           />
-          <h1 className="text-4xl font-semibold tracking-wide text-gold">
+          <h1 className="text-4xl font-semibold tracking-wide ">
             {letters.slice(0, visibleLetters).join("")}
             <span className="animate-pulse">...</span>
           </h1>

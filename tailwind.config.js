@@ -7,8 +7,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: "var(--font-poppins)",
+        display: "var(--font-playfair)",
+      },
       colors: {
-        gold: "#D4AF37",
+        gold: "#F4CD8A",
         black: "#0a0a0a",
       },
     },

@@ -15,24 +15,35 @@ const [open, setOpen] = useState(false);
   const [activeLink, setActiveLink] = useState<string | null>(null);
 const services = [
     {
-      title: t.house_call[lang],
-      price: "$100",
-      link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/W2QHA46QPMZ67V44ZLQSX3KR",
-    },
-    {
-      title: t.after_hours[lang],
-      price: "$50",
-      link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/EU2ZSC6VZHKC6S4VDE2EDQFC",
-    },
-    {
-      title: t.haircut[lang],
-      price: "$30",
+         title: translations.services[lang].haircut,
+    price: "$30",
+    description: translations.services[lang].descriptions.haircut,
       link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/7DFEQNSC5A4GCUFO3SABTR2J",
     },
     {
-      title: t.haircut_beard[lang],
-      price: "$35",
+      title: translations.services[lang].haircut_beard,
+      price: "$40",
+      description:  translations.services[lang].descriptions.haircut_beard,
       link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/H6VBVZR5WK6L2AV25LFMZYTE",
+    },
+    {
+      title:translations.services[lang].after_hours,
+      price: "$50",
+       description:  translations.services[lang].descriptions.after_hours,
+      link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/EU2ZSC6VZHKC6S4VDE2EDQFC",
+    },  
+    {
+      title: translations.services[lang].vip,
+      price: "$60",
+      description: translations.services[lang].descriptions.vip,
+      link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/EU2ZSC6VZHKC6S4VDE2EDQFC",
+    },
+  
+  {
+      title: translations.services[lang].house_call,
+      price: "$100",
+      description:  translations.services[lang].descriptions.house_call,
+      link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/W2QHA46QPMZ67V44ZLQSX3KR",
     },
   ];
    const handleOpen = (link: string) => {
@@ -64,13 +75,18 @@ const services = [
     transition={{ duration: 0.8 }}
   >
     {/*Step Into Style*/}
-    <h1 className="text-6xl sm:text-6xl font-bold mb-4">{t.headline[lang]}</h1>
+    <h1 className="text-gold text-6xl sm:text-6xl font-bold italic mb-4" >{t.headline[lang]}</h1>
+   
     {/* Book your crown-worthy cut today.*/}
-    <p className="text-lg sm:text-xl mb-6 uppercase ">
+    <p className="text-lg sm:text-xl mb-6 uppercase italic">
      {t.sub[lang]}
     </p>
     <a href="#booking">
-      <button className="bg-gold text-black px-6 py-3 text-lg font-medium rounded hover:bg-yellow-400 transition">
+      <button 
+      className="text-black bg-gold px-6 py-2 text-lg font-bold rounded-1xl border-4"
+
+    
+      >
         {t.button[lang]}
       </button>
     </a>
@@ -78,17 +94,19 @@ const services = [
 </section>
 
       {/* Services Section */}
-      <section className="py-16 px-4 sm:px-8 bg-gray-50" id="services">
-        <h2 className="text-3xl font-semibold text-center mb-10">Our Services</h2>
-        <div className="grid sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <section className="py-16 px-4 sm:px-8 bg-black" id="services">
+        <h2 className="text-gold text-3xl font-extrabold text-center mb-10">Our Services</h2>
+        <div className="text-white  grid sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {services.map((service, i) => (
             <Card 
             key={i}
             className="cursor-pointer hover:shadow-xl transition"
+
             onClick={() =>  handleOpen(service.link)}
             >
               <CardContent className="p-6 text-center">
                 <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
+                 <p className="text-sm italic text-gray-300">{service.description}</p>
                 <p className="text-gray-500 text-lg">{service.price}</p>
               </CardContent>
             </Card>

@@ -7,8 +7,9 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --font-playfair: 'Playfair Display', serif;
+  --background: #171717;
+  --foreground: #ffffff;
 }
 
 @theme inline {
@@ -28,5 +29,23 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+   font-family: var(--font-playfair);
 }
+
+
+.text-gold {
+  color: #F4CD8A;
+}
+
+
+.bg-gold {
+  background-color: #F4CD8A;
+  transition: background-color 0.3s ease;
+}
+
+.bg-gold:hover {
+  color: #F4CD8A;
+  background-color:transparent;
+  border-color: #F4CD8A;
+}
+
