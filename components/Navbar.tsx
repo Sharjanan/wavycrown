@@ -10,17 +10,19 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { useLanguage } from "./LanguageContext";
+import { translations } from "@/components/lang";
 
 export default function Navbar() {
   const { lang, setLang } = useLanguage();
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  // Update nav visibility on scroll
+  const t = translations.home;
+  // Hide/show on scroll
   useEffect(() => {
     const handleScroll = () => {
       const currentScroll = window.scrollY;
+      
       setShowNavbar(currentScroll < lastScrollY || currentScroll < 80);
       setLastScrollY(currentScroll);
     };
@@ -28,7 +30,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-  // Define nav links only once
   const navLinks = [
     { href: "/calendar", label: "Calendar" },
     { href: "#services", label: "Services" },
@@ -38,53 +39,15 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full bg-black text-white z-50 shadow-md transition-transform duration-300 ${
+        className={`fixed top-0 left-0 py-5 w-full bg-black text-white z-50 shadow-md transition-transform duration-300 ${
           showNavbar ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <div className="container mx-auto flex items-center justify-between px-4 py-3">
-          {/* Logo */}
-          <Link href="/">
-            <Image
-              src="/wavycrownbluebglogo.png"
-              alt="WavyCrown Logo"
-              width={120}
-              height={120}
-              className="cursor-pointer"
-            />
-          </Link>
-
-          {/* Desktop nav */}
-          <nav className="hidden sm:flex items-center space-x-4 text-white font-bold uppercase">
-            {navLinks.map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                className="hover:text-gold transition-colors duration-300 italic"
-              >
-                {label}
-              </Link>
-            ))}
-
-            <DropdownMenu>
-              <DropdownMenuTrigger className="border border-gold px-3 rounded hover:bg-gold hover:text-gold transition">
-                {lang === "en" ? "English" : "Français"}
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-black border-gold text-gold">
-                <DropdownMenuItem onClick={() => setLang("en")}>
-                  🇬🇧 English
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setLang("fr")}>
-                  🇫🇷 Français
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </nav>
-
-          {/* Hamburger for mobile */}
+        <div className="flex items-center justify-between w-full px-4 py-3 relative">
+          {/* Hamburger - always visible on left */}
           <button
-            className="sm:hidden text-white focus:outline-none"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="text-gold focus:outline-none z-50"
+            onClick={() => setIsMobileMenuOpen(true)}
           >
             <svg
               className="w-6 h-6"
@@ -99,23 +62,63 @@ export default function Navbar() {
                 d="M4 6h16M4 12h16M4 18h16"
               />
             </svg>
+            
           </button>
+
+          {/* Centered logo */}
+          <div className="absolute left-1/2 transform -translate-x-1/2">
+            <Link href="/">
+              <Image
+                src="/wavycrownbluebglogo.png"
+                alt="WavyCrown Logo"
+                width={120}
+                height={120}
+                className="cursor-pointer"
+              />
+            </Link>
+          </div>
+          {/* CTA Button - top right */}
+    <div className="z-50">
+      <a href="#booking">
+        <button
+          className="text-xs sm:text-sm md:text-base text-black bg-gold glow-gold px-6 py-2  font-bold rounded-2xl  uppercase"
+        >
+          {t.button[lang].split("\n").map((line, i) => (
+  <span key={i}>
+    {line}
+    <br />
+  </span>))}
+        </button>
+      </a>
+    </div>
+
         </div>
       </header>
 
-      {/* Mobile drawer */}
+      {/* Slide-in drawer menu from left */}
       <div
-        className={`fixed top-0 right-0 h-full w-64 bg-black text-white font-bold uppercase italic z-50 transform transition-transform duration-300 ${
-          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
-        } sm:hidden`}
+        className={`fixed top-0 left-0 h-full w-64 bg-neutral-900 text-white font-bold uppercase z-50 transform transition-transform duration-300 ${
+          isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
       >
         <div className="flex flex-col p-6 space-y-4">
           <button
-            className="self-end text-2xl"
+            className="self-end text-3xl text-gold focus:outline-none"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             ×
           </button>
+
+          {/* Logo inside drawer (optional, can remove if redundant) */}
+          <Link href="/">
+            <Image
+              src="/wavycrownbluebglogo.png"
+              alt="WavyCrown Logo"
+              width={120}
+              height={120}
+              className="cursor-pointer"
+            />
+          </Link>
 
           {navLinks.map(({ href, label }) => (
             <Link
@@ -128,19 +131,29 @@ export default function Navbar() {
             </Link>
           ))}
 
-         <DropdownMenu>
-              <DropdownMenuTrigger className="border border-gold px-3 rounded hover:bg-gold hover:text-gold transition">
-                {lang === "en" ? "English" : "Français"}
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-black border-gold text-gold">
-                <DropdownMenuItem onClick={() => setLang("en")}>
-                  🇬🇧 English
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setLang("fr")}>
-                  🇫🇷 Français
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+          <DropdownMenu>
+            <DropdownMenuTrigger className="border border-gold px-3 rounded hover:bg-gold hover:text-gold transition">
+              {lang === "en" ? "English" : "Français"}
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="bg-black border-gold text-gold">
+              <DropdownMenuItem
+                onClick={() => {
+                  setLang("en");
+                  setIsMobileMenuOpen(false);
+                }}
+              >
+                🇬🇧 English
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => {
+                  setLang("fr");
+                  setIsMobileMenuOpen(false);
+                }}
+              >
+                🇫🇷 Français
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </>

@@ -12,7 +12,7 @@ export const translations = {
     },
     button: {
       en: "Book Now",
-      fr: "Réserver maintenant",
+      fr: "Réserver\nmaintenant",
     },
   },
 
@@ -23,13 +23,14 @@ export const translations = {
     },
     booking: {
       en: "Book Now",
-      fr: "Réserver",
+      fr: "Réserver Maintenant",
     },
   },
 
   // ✅ Move this outside of "navbar"
   services: {
     en: {
+      service_section: "Choose a Service",
       haircut: "HAIR CUT (TEENAGE/MEN'S/KIDS)",
       haircut_beard: "Haircut & Beard",
       after_hours: "After/Before Hours",
@@ -46,6 +47,7 @@ export const translations = {
     },
 
     fr: {
+      service_section: "Choisissez un Service",
       haircut: "COUPE (ADOLESCENT/HOMME/ENFANT)",
       haircut_beard: "Coupe + Barbe",
       after_hours: "Heures supplémentaires",
