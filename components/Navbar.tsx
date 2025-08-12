@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useLanguage } from "./LanguageContext";
 import { translations } from "@/components/lang";
+import { Instagram, Facebook, Music2 } from "lucide-react"; // TikTok uses Music2 icon
 
 export default function Navbar() {
   const { lang, setLang } = useLanguage();
@@ -22,7 +23,7 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScroll = window.scrollY;
-      
+
       setShowNavbar(currentScroll < lastScrollY || currentScroll < 80);
       setLastScrollY(currentScroll);
     };
@@ -50,7 +51,7 @@ export default function Navbar() {
             onClick={() => setIsMobileMenuOpen(true)}
           >
             <svg
-              className="w-6 h-6"
+              className="w-8 h-8"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
@@ -62,7 +63,6 @@ export default function Navbar() {
                 d="M4 6h16M4 12h16M4 18h16"
               />
             </svg>
-            
           </button>
 
           {/* Centered logo */}
@@ -77,21 +77,20 @@ export default function Navbar() {
               />
             </Link>
           </div>
-          {/* CTA Button - top right */}
-    <div className="z-50">
-      <a href="#booking">
-        <button
-          className="text-xs sm:text-sm md:text-base text-black bg-gold glow-gold px-6 py-2  font-bold rounded-2xl  uppercase"
-        >
-          {t.button[lang].split("\n").map((line, i) => (
-  <span key={i}>
-    {line}
-    <br />
-  </span>))}
-        </button>
-      </a>
-    </div>
 
+          {/* CTA Button - top right */}
+          <div className="z-50">
+            <a href="#booking">
+              <button className="text-xs sm:text-sm md:text-base text-black bg-gold glow-gold px-6 py-2  font-bold rounded-2xl  uppercase">
+                {t.button[lang].split("\n").map((line, i) => (
+                  <span key={i}>
+                    {line}
+                    <br />
+                  </span>
+                ))}
+              </button>
+            </a>
+          </div>
         </div>
       </header>
 

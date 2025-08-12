@@ -50,7 +50,7 @@ export const translations = {
       service_section: "Choisissez un Service",
       haircut: "COUPE (ADOLESCENT/HOMME/ENFANT)",
       haircut_beard: "Coupe + Barbe",
-      after_hours: "Heures supplémentaires",
+      after_hours: "Heures Irégulières",
       vip: "Service VIP",
       house_call: "Service à domicile",
 

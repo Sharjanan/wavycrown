@@ -91,7 +91,7 @@ const services = [
 </section>
 
       {/* Services Section */}
-      <section className="py-16 px-4 sm:px-8 bg-black" id="services">
+      <section className="py-16 px-4 sm:px-8 bg-black"  id="booking">
          {/* choose our service */}
         <h2 className="text-gold text-3xl font-extrabold text-center mb-10">{ translations.services[lang].service_section}</h2>
         <div className="text-white  grid sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
@@ -125,23 +125,10 @@ const services = [
       </Dialog>
       </section>
 
-      {/* Square Booking Embed */}
-      <section className="py-20 px-4 sm:px-8 bg-white" id="booking">
-        <h2 className="text-3xl font-semibold text-center mb-8">Book an Appointment</h2>
-        <div className="max-w-4xl mx-auto">
-          <iframe
-            src="https://squareup.com/appointments/book/YOUR-SQUARE-URL"
-            title="Book Appointment"
-            style={{
-              width: "100%",
-              height: "100%",
-              border: "none",
-              borderRadius: "12px",
-            }}
-            loading="lazy"
-          ></iframe>
-        </div>
-      </section>
+   
+     
+
+      {/* Footer Section */}
     </main>
   );
 }

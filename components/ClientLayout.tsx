@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 import LoadingScreen from "./LoadingScreen";
 import { LanguageProvider } from "./LanguageContext";
 
@@ -19,6 +20,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     <LanguageProvider>
       <Navbar   />
       {children}
+      <Footer />
     </LanguageProvider>
   );
 }
