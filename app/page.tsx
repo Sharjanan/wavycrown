@@ -1,6 +1,5 @@
 "use client"; // Only if you're using the /app directory in Next.js 13+
 
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/components/LanguageContext";

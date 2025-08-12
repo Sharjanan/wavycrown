@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useLanguage } from "./LanguageContext";
 import { translations } from "@/components/lang";
-import { Instagram, Facebook, Music2 } from "lucide-react"; // TikTok uses Music2 icon
 
 export default function Navbar() {
   const { lang, setLang } = useLanguage();
