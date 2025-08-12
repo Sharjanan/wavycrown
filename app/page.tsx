@@ -5,8 +5,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/components/LanguageContext";
 import { translations } from "@/components/lang";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle  } from "@/components/ui/dialog";
 import { useState } from "react";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 export default function Home() {
     const { lang } = useLanguage();
@@ -114,6 +115,9 @@ const services = [
       {/* Booking Modal */}
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="w-[95vw] h-[95vh] max-w-none max-h-none p-0 overflow-hidden">
+           <VisuallyHidden>
+              <DialogTitle>Booking Window</DialogTitle>
+            </VisuallyHidden>
           {activeLink && (
             <iframe
               src={activeLink}
