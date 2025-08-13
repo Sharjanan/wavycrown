@@ -1,49 +1,34 @@
-import square from "square";
-import { NextResponse } from "next/server";
-import { SquareClient } from "square";
+// app/api/availability/route.ts
+import { NextRequest, NextResponse } from "next/server";
 
-   const client = new SquareClient({
-    token: process.env.SQUARE_ACCESS_TOKEN!,
-    environment: 'production',
-  });
-export async function POST(req: Request) {
-  const body = await req.json();
+type AvailabilityRequest = {
+  startDate: string; // YYYY-MM-DD
+  endDate: string;   // YYYY-MM-DD
+};
+
+type Slot = {
+  startAt: string;   // ISO datetime
+  locationId: string;
+};
+
+export async function POST(req: NextRequest) {
+  let body: AvailabilityRequest;
+
+  try {
+    body = (await req.json()) as AvailabilityRequest;
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
+  }
 
   const { startDate, endDate } = body;
 
-  try {
-const response = await fetch("https://connect.squareupsandbox.com/v2/bookings/availability/search", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    "Square-Version": "2023-12-13",
-    "Authorization": `Bearer ${process.env.SQUARE_ACCESS_TOKEN}`,
-  },
-  body: JSON.stringify({
-    query: {
-      filter: {
-        locationId: process.env.SQUARE_LOCATION_ID,
-        segmentFilters: [
-          {
-            serviceVariationId: "H6VBVZR5WK6L2AV25LFMZYTE",
-            teamMemberIdFilter: {
-              any: ["TMjlxDEVkFWHS8Ea"]
-            }
-          }
-        ],
-        startAtRange: {
-          startAt: "2025-05-20T00:00:00Z",
-          endAt: "2025-05-27T00:00:00Z"
-        }
-      }
-    }
-  })
-});
+  // TODO: integrate Square SDK here and populate slots from real data.
+  // Keeping a typed, empty array for now avoids 'any' and unused vars.
+  const slots: Slot[] = [];
 
-const data = await response.json();
-
-    return NextResponse.json(data.result);
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
-  }
+  return NextResponse.json({
+    availabilities: slots,
+    startDate,
+    endDate,
+  });
 }

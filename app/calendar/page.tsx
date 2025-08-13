@@ -1,9 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
+interface Slot {
+  startAt: string; // or Date if you parse it
+  locationId: string;
+}
 export default function CalendarPage() {
-  const [slots, setSlots] = useState<any[]>([]);
+  const [slots, setSlots] = useState<Slot[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
