@@ -16,32 +16,32 @@ export default function Home() {
   const services = [
     {
       title: translations.services[lang].haircut,
-      price: "$30",
+      price: translations.services[lang].price.haircut,
       description: translations.services[lang].descriptions.haircut,
       link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/ADMBGK35RBFXVLZGOZO5UOH6",
     },
     {
       title: translations.services[lang].haircut_beard,
-      price: "$40",
+      price: translations.services[lang].price.haircut_beard,
       description: translations.services[lang].descriptions.haircut_beard,
       link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/V7RQQCD6JUDXBYIKIDS24TKY",
     },
     {
       title: translations.services[lang].after_hours,
-      price: "$60",
+      price: translations.services[lang].price.after_hours,
       description: translations.services[lang].descriptions.after_hours,
       link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/EU2ZSC6VZHKC6S4VDE2EDQFC",
     },
     {
       title: translations.services[lang].vip,
-      price: "$80",
+      price: translations.services[lang].price.vip,
       description: translations.services[lang].descriptions.vip,
       link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/2TF6OLBYKZPUNBFGDFRB7HAU",
     },
 
     {
       title: translations.services[lang].house_call,
-      price: "$100",
+      price: translations.services[lang].price.house_call,
       description: translations.services[lang].descriptions.house_call,
       link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/W2QHA46QPMZ67V44ZLQSX3KR",
     },
@@ -52,9 +52,9 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-white text-gray-900">
+    <main className="min-h-screen bg-black text-gray-900">
       {/* Hero Section */}
-      <section className="relative h-screen overflow-hidden text-white flex items-center justify-center">
+     <section className="relative mt-50 h-[70vh] w-[95vw] max-w-8xl mx-auto  overflow-hidden text-gold flex items-center justify-center border-1 border-gold shadow-[0_0_15px_rgba(212,175,55,0.6)]">
         {/* Background Image cropped to show bottom only */}
         <div className="absolute inset-0 overflow-hidden z-0">
           <div
@@ -89,27 +89,60 @@ export default function Home() {
           </a>
         </motion.div>
       </section>
+      
+      {/*  Section Separator */}
+      <div className="relative mt-20 h-[4px] w-full text-gold border-b-1 border-gold shadow-[0_0_15px_rgba(212,175,55,0.6)]"></div>
+
 
       {/* Services Section */}
-      <section className="py-16 px-4 sm:px-8 bg-black" id="booking">
+      <section className="py-16 px-4 bg-black" id="booking">
         {/* choose our service */}
-        <h2 className="text-gold text-3xl font-extrabold text-center mb-10">
+        <h2 className="text-gold text-5xl font-extrabold text-center mb-10">
           {translations.services[lang].service_section}
         </h2>
-        <div className="text-white  grid sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="text-white flex flex-col gap-10 max-w-5xl mx-auto">
           {services.map((service, i) => (
             <Card
               key={i}
-              className="cursor-pointer hover:shadow-xl transition"
+              className="cursor-pointer hover:shadow-xl transition text-gold border-0 border-t-4 "
               onClick={() => handleOpen(service.link)}
             >
-              <CardContent className="p-6 text-center">
-                <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-                <p className="text-sm italic text-gray-300">
-                  {service.description}
-                </p>
-                <p className="text-gray-500 text-lg">{service.price}</p>
-              </CardContent>
+              <CardContent className="p-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
+            {/* Left column - text */}
+            <div className="text-center sm:text-left">
+              <h1 className="text-3xl font-semibold mb-2">{service.title}</h1>
+              <p className="text italic text-gray-300">
+                {service.description}
+              </p>
+              <p className="text-gray-500 text-3xl mt-3">{service.price}</p>
+
+              <div className="z-50 mt-20">
+            
+              <button 
+               className="text-xs sm:text-sm md:text-base text-black bg-gold glow-gold px-6 py-2  font-bold rounded-2xl  uppercase"
+               onClick={() => handleOpen(service.link)}>
+                {t.explore_button[lang].split("\n").map((line, i) => (
+                  <span key={i}>
+                    {line}
+                    <br />
+                  </span>
+                ))}
+              </button>
+
+          </div>
+            </div>
+
+            {/* Right column - photo */}
+            <div className="flex justify-center sm:justify-end">
+              <img
+                src={`vercel.svg`} // adjust path / naming convention
+                alt={service.title}
+                className="w-full max-w-xs rounded-lg border border-gold shadow-[0_0_15px_rgba(212,175,55,0.6)]"
+              />
+            </div>
+          </div>
+        </CardContent>
             </Card>
           ))}
         </div>

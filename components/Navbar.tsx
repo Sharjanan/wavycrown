@@ -39,7 +39,8 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 py-5 w-full bg-black text-white z-50 shadow-md transition-transform duration-300 ${
+        className={`fixed top-0 left-0 py-10 w-full bg-black text-gold z-50 shadow-md transition-transform duration-300 shadow-md border-b-1 border-gold 
+              [box-shadow:0_0_15px_rgba(212,175,55,0.6)]  ${
           showNavbar ? "translate-y-0" : "-translate-y-full"
         }`}
       >
@@ -140,7 +141,7 @@ export default function Navbar() {
                   setIsMobileMenuOpen(false);
                 }}
               >
-                🇬🇧 English
+                 English
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => {
@@ -148,7 +149,7 @@ export default function Navbar() {
                   setIsMobileMenuOpen(false);
                 }}
               >
-                🇫🇷 Français
+                 Français
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
