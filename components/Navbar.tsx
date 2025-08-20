@@ -31,7 +31,7 @@ export default function Navbar() {
   }, [lastScrollY]);
 
   const navLinks = [
-    { href: "/calendar", label: "Calendar" },
+    { href: "/HouseCall", label: "House Call" },
     { href: "#services", label: "Services" },
     { href: "#booking", label: lang === "en" ? "Book Now" : "Réserver" },
   ];
