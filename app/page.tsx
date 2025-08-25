@@ -52,7 +52,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-black text-gray-900">
+    <main className="min-h-screen b text-gray-900">
       {/* Hero Section */}
      <section className="relative mt-50 h-[70vh] w-[95vw] max-w-8xl mx-auto  overflow-hidden text-gold flex items-center justify-center border-1 border-gold shadow-[0_0_15px_rgba(212,175,55,0.6)]">
         {/* Background Image cropped to show bottom only */}
@@ -92,7 +92,29 @@ export default function Home() {
       
       {/*  Section Separator */}
       <div className="relative mt-20 h-[4px] w-full text-gold border-b-1 border-gold shadow-[0_0_15px_rgba(212,175,55,0.6)]"></div>
+      {/* Our Schedule Section */}
+<section className="py-16 px-4 z-50 bg-black text-white 
+                    border-b border-gold
+                    [box-shadow:0_0_15px_rgba(212,175,55,0.6)]">
+  <div className="max-w-5xl mx-auto grid grid-cols-3 text-center">
+    {/* Title */}
+    <div className="flex items-center justify-center">
+      <h2 className="text-3xl font-extrabold">OUR SCHEDULE</h2>
+    </div>
 
+    {/* Weekdays */}
+    <div className="flex flex-col items-center justify-center">
+      <h2 className="text-3xl font-semibold">MONDAY TO FRIDAY</h2>
+      <h2 className="text-3xl">9:00 – 21:00</h2>
+    </div>
+
+    {/* Weekends */}
+    <div className="flex flex-col items-center justify-center">
+      <h2 className="text-3xl font-semibold">SATURDAY</h2>
+      <h2 className="text-3xl">9:00 – 17:00</h2>
+    </div>
+  </div>
+</section>
 
       {/* Services Section */}
       <section className="py-16 px-4 bg-black" id="booking">
@@ -163,9 +185,6 @@ export default function Home() {
           </DialogContent>
         </Dialog>
       </section>
-
-     
-      {/* Footer Section */}
     </main>
   );
 }

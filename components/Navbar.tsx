@@ -66,13 +66,13 @@ export default function Navbar() {
           </button>
 
           {/* Centered logo */}
-          <div className="absolute left-1/2 transform -translate-x-1/2">
+          <div className="absolute left-1/2 transform -translate-x-1/2 mb-10">
             <Link href="/">
               <Image
-                src="/wavycrownbluebglogo.png"
+                src="/sky_distric_black_bg.png"
                 alt="WavyCrown Logo"
-                width={120}
-                height={120}
+                width={250}
+                height={250}
                 className="cursor-pointer"
               />
             </Link>
@@ -96,7 +96,7 @@ export default function Navbar() {
 
       {/* Slide-in drawer menu from left */}
       <div
-        className={`fixed top-0 left-0 h-full w-64 bg-neutral-900 text-white font-bold uppercase z-50 transform transition-transform duration-300 ${
+        className={`fixed top-0 left-0 h-full w-64 bg-white text-black font-bold uppercase z-50 transform transition-transform duration-300 ${
           isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -111,10 +111,10 @@ export default function Navbar() {
           {/* Logo inside drawer (optional, can remove if redundant) */}
           <Link href="/">
             <Image
-              src="/wavycrownbluebglogo.png"
+              src="/sky_distric_white_bg.png"
               alt="WavyCrown Logo"
-              width={120}
-              height={120}
+              width={250}
+              height={250}
               className="cursor-pointer"
             />
           </Link>
