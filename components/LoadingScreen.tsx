@@ -43,10 +43,10 @@ export default function LoadingScreen() {
           className="min-h-screen bg-black flex flex-col items-center justify-center text-white"
         >
           <Image
-            src="/wavycrownbluebglogo.png"
+            src="/wavycrown.png"
             alt="WavyCrown Logo"
-            width={250}
-            height={250}
+            width={750}
+            height={750}
             className="mb-6"
           />
           <h1 className="text-4xl font-semibold tracking-wide ">

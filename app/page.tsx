@@ -19,24 +19,28 @@ export default function Home() {
       price: translations.services[lang].price.haircut,
       description: translations.services[lang].descriptions.haircut,
       link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/ADMBGK35RBFXVLZGOZO5UOH6",
+      image: "/services/mahan.png",
     },
     {
       title: translations.services[lang].haircut_beard,
       price: translations.services[lang].price.haircut_beard,
       description: translations.services[lang].descriptions.haircut_beard,
       link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/V7RQQCD6JUDXBYIKIDS24TKY",
+      image: "/services/mahan.png",
     },
-    {
-      title: translations.services[lang].after_hours,
-      price: translations.services[lang].price.after_hours,
-      description: translations.services[lang].descriptions.after_hours,
-      link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/EU2ZSC6VZHKC6S4VDE2EDQFC",
-    },
+    // {
+    //   title: translations.services[lang].after_hours,
+    //   price: translations.services[lang].price.after_hours,
+    //   description: translations.services[lang].descriptions.after_hours,
+    //   link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/EU2ZSC6VZHKC6S4VDE2EDQFC",
+    //   image: "/services/mahan.png",
+    // },
     {
       title: translations.services[lang].vip,
       price: translations.services[lang].price.vip,
       description: translations.services[lang].descriptions.vip,
       link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/2TF6OLBYKZPUNBFGDFRB7HAU",
+      image: "/services/mahan.png",
     },
 
     {
@@ -44,6 +48,7 @@ export default function Home() {
       price: translations.services[lang].price.house_call,
       description: translations.services[lang].descriptions.house_call,
       link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/W2QHA46QPMZ67V44ZLQSX3KR",
+      image: "/services/mahan.png",
     },
   ];
   const handleOpen = (link: string) => {
@@ -104,7 +109,7 @@ export default function Home() {
 
     {/* Weekdays */}
     <div className="flex flex-col items-center justify-center">
-      <h2 className="text-3xl font-semibold">MONDAY TO FRIDAY</h2>
+      <h2 className="text-3xl font-semibold font-lostinsouth">MONDAY TO FRIDAY</h2>
       <h2 className="text-3xl">9:00 – 21:00</h2>
     </div>
 
@@ -118,10 +123,11 @@ export default function Home() {
 
       {/* Services Section */}
       <section className="py-16 px-4 bg-black" id="booking">
-        {/* choose our service */}
-        <h2 className="text-gold text-5xl font-extrabold text-center mb-10">
+        {/* choose a service */}
+        <h2 className=" text-gold text-5xl font-extrabold text-center mb-10">
           {translations.services[lang].service_section}
         </h2>
+
         <div className="text-white flex flex-col gap-10 max-w-5xl mx-auto">
           {services.map((service, i) => (
             <Card
@@ -158,7 +164,7 @@ export default function Home() {
             {/* Right column - photo */}
             <div className="flex justify-center sm:justify-end">
               <img
-                src={`vercel.svg`} // adjust path / naming convention
+                src={'vercel.svg'} // adjust path / naming convention
                 alt={service.title}
                 className="w-full max-w-xs rounded-lg border border-gold shadow-[0_0_15px_rgba(212,175,55,0.6)]"
               />
