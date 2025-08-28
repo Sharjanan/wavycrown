@@ -11,12 +11,13 @@ export default function Footer() {
           <div className="absolute left-1/2 transform -translate-x-1/2 mb-12">
             <Link href="/">
               <Image
-                src="/5ky.png"
+                src="/wavycrown.png"
                 alt="WavyCrown Logo"
-                width={250}
-                height={250}
+                width={500}
+                height={500}
                 className="cursor-pointer"
               />
+              
             </Link>
           </div>
       </div>

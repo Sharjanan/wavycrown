@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -11,13 +12,17 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useLanguage } from "./LanguageContext";
 import { translations } from "@/components/lang";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 export default function Navbar() {
+  const [open, setOpen] = useState(false);
   const { lang, setLang } = useLanguage();
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const t = translations.home;
+  
   // Hide/show on scroll
   useEffect(() => {
     const handleScroll = () => {
@@ -81,19 +86,50 @@ export default function Navbar() {
           {/* CTA Button - top right */}
           <div className="z-50">
             <a href="#booking">
-              <button className="text-xs sm:text-sm md:text-base text-black bg-gold glow-gold px-6 py-2  font-bold rounded-2xl  uppercase">
+              <Button variant="gold" size="pill" onClick={() => setOpen(true)}>
                 {t.button[lang].split("\n").map((line, i) => (
                   <span key={i}>
                     {line}
                     <br />
                   </span>
                 ))}
-              </button>
+              </Button>
             </a>
           </div>
         </div>
       </header>
+      {/* Popup dialog */}
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="w-[90vw] max-w-sm p-6 text-center space-y-6">
+          <VisuallyHidden>
+            <DialogTitle>Contact Options</DialogTitle>
+          </VisuallyHidden>
 
+          <h2 className="text-3xl font-bold text-white uppercase">book your session</h2>
+           <Image
+                src="/sky_distric_black_bg.png"
+                alt="WavyCrown Logo"
+                width={250}
+                height={250}
+                className="cursor-pointer justify-center mx-auto"
+              />     
+          <div className="flex flex-row justify-center gap-8">
+            {/* Call Us button */}
+            <a href="tel:+15149249154">
+              <Button variant="gold" size="pill" >
+                 Call Us at (514) 924-9154
+              </Button>
+            </a>
+
+            {/* Book Online button */}
+            <a href="#booking">
+              <Button variant="gold" size="pill" >
+                 Book Online
+              </Button>
+            </a>
+          </div>
+        </DialogContent>
+      </Dialog>
       {/* Slide-in drawer menu from left */}
       <div
         className={`fixed top-0 left-0 h-full w-64 bg-white text-black font-bold uppercase z-50 transform transition-transform duration-300 ${
