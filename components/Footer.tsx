@@ -1,14 +1,15 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { LocationHome } from "@mynaui/icons-react";
 
 export default function Footer() {
   return (
     <>
-    <footer className="w-full bg-gold text-gold text-center py-6 mt-12">
-      <div className="container mx-auto">
+    <footer className="w-full bg-black text-gold text-center">
+      <div className="absolute bg-black left-1/2 transform -translate-x-1/2">
         {/* Centered logo */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 mb-12">
+          
             <Link href="/">
               <Image
                 src="/wavycrown.png"
@@ -19,8 +20,9 @@ export default function Footer() {
               />
               
             </Link>
-          </div>
+          
       </div>
+      <LocationHome className= "text-gold"/>
     </footer>
     </>
   );

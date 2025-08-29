@@ -19,35 +19,17 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { lang, setLang } = useLanguage();
   const [showNavbar, setShowNavbar] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const t = translations.home;
-  
-  // Hide/show on scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScroll = window.scrollY;
-
-      setShowNavbar(currentScroll < lastScrollY || currentScroll < 80);
-      setLastScrollY(currentScroll);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
-
   const navLinks = [
     // { href: "/calendar", label: "Calendar" },
     { href: "#services", label: "Services" },
     { href: "#booking", label: lang === "en" ? "Book Now" : "Réserver" },
   ];
-
   return (
     <>
       <header
-        className={`fixed top-0 left-0 py-10 w-full bg-black text-gold z-50 shadow-md transition-transform duration-300 shadow-md border-b-1 border-gold 
-              [box-shadow:0_0_15px_rgba(212,175,55,0.6)]  ${
-          showNavbar ? "translate-y-0" : "-translate-y-full"
-        }`}
+        className={`fixed top-0 left-0 py-10 w-full bg-black text-gold z-50 transition-transform shadow-md border-b border-gold `}
       >
         <div className="flex items-center justify-between w-full px-4 py-3 relative">
           {/* Hamburger - always visible on left */}
@@ -85,7 +67,7 @@ export default function Navbar() {
 
           {/* CTA Button - top right */}
           <div className="z-50">
-            <a href="#booking">
+            
               <Button variant="gold" size="pill" onClick={() => setOpen(true)}>
                 {t.button[lang].split("\n").map((line, i) => (
                   <span key={i}>
@@ -94,7 +76,7 @@ export default function Navbar() {
                   </span>
                 ))}
               </Button>
-            </a>
+         
           </div>
         </div>
       </header>
@@ -123,7 +105,7 @@ export default function Navbar() {
 
             {/* Book Online button */}
             <a href="#booking">
-              <Button variant="gold" size="pill" >
+              <Button variant="gold" size="pill"  onClick={() => setOpen(false)}>
                  Book Online
               </Button>
             </a>

@@ -57,9 +57,9 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen b text-gray-900">
+    <main className="min-h-screen text-gray-900">
       {/* Hero Section */}
-     <section className="relative mt-50 h-[70vh] w-[95vw] max-w-8xl mx-auto  overflow-hidden text-gold flex items-center justify-center border-1 border-gold shadow-[0_0_15px_rgba(212,175,55,0.6)]">
+     <section className="relative mt-50 mb-30 h-[70vh] w-[95vw] max-w-8xl mx-auto overflow-hidden text-gold flex items-center justify-center glow-gold">
         {/* Background Image cropped to show bottom only */}
         <div className="absolute inset-0 overflow-hidden z-0">
           <div
@@ -96,17 +96,14 @@ export default function Home() {
       </section>
       
       {/*  Section Separator */}
-      <div className="relative mt-20 h-[4px] w-full text-gold border-b-1 border-gold shadow-[0_0_15px_rgba(212,175,55,0.6)]"></div>
+      {/* <div className="relative mt-20 h-[4px] w-full text-gold border-b-1 border-gold glow-gold"></div> */}
       {/* Our Schedule Section */}
-<section className="py-16 px-4 z-50 bg-black text-white 
-                    border-b border-gold
-                    [box-shadow:0_0_15px_rgba(212,175,55,0.6)]">
+<section className="py-16 px-4 z-50 bg-black text-white  border-b border-t border-gold">  
   <div className="max-w-5xl mx-auto grid grid-cols-3 text-center">
     {/* Title */}
     <div className="flex items-center justify-center">
-      <h2 className="text-3xl font-extrabold">OUR SCHEDULE</h2>
+      <h2 className="text-3xl font-extrabold">OUR <span className="text-gold">SCHEDULE</span></h2>
     </div>
-
     {/* Weekdays */}
     <div className="flex flex-col items-center justify-center">
       <h2 className="text-3xl font-semibold font-lostinsouth">MONDAY TO FRIDAY</h2>
@@ -127,7 +124,6 @@ export default function Home() {
         <h2 className=" text-gold text-5xl font-extrabold text-center mb-10">
           {translations.services[lang].service_section}
         </h2>
-
         <div className="text-white flex flex-col gap-10 max-w-5xl mx-auto">
           {services.map((service, i) => (
             <Card
@@ -144,9 +140,7 @@ export default function Home() {
                 {service.description}
               </p>
               <p className="text-gray-500 text-3xl mt-3">{service.price}</p>
-
-              <div className="z-50 mt-20">
-            
+              <div className="z-50 mt-20">            
               <button 
                className="text-xs sm:text-sm md:text-base text-black bg-gold glow-gold px-6 py-2  font-bold rounded-2xl  uppercase"
                onClick={() => handleOpen(service.link)}>
