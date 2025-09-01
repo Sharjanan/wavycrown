@@ -11,11 +11,11 @@ export default function Footer() {
         <div className="flex flex-col items-start space-y-3">
           <div className="flex items-center gap-2">
             <LocationHome className="text-gold" />
-            <p className="text-white">123 Main St, City, Country</p>
+            <p className="text-white">Address will be given after booked appointment</p>
           </div>
           <div className="flex items-center gap-2">
             <Telephone className="text-gold" />
-            <a href="tel:+15149249154" className="text-gold hover:underline">
+            <a href="tel:+15149249154" className="text-white hover:bg-gold hover:text-black px-2 py-1 rounded">
               (514) 924-9154
             </a>
           </div>
