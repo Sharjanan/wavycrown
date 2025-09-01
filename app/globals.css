@@ -37,7 +37,9 @@ body {
   font-family: var(--font-playfair);
 }
 
-
+.font-lostinsouth {
+  font-family: var(--font-lostinsouth);
+}
 .text-gold {
   color: #F4CD8A;
 }

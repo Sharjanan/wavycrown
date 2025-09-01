@@ -42,7 +42,7 @@ export const translations = {
       house_call: "House Call",
 
       descriptions: {
-        haircut: "Classic haircut with clean lines and fad for teenagers, mens or kids.",
+        haircut: "Classic haircut with clean lines and fade for teenagers, mens or kids.",
         haircut_beard: "Haircut + detailed beard trim and shape-up.",
         after_hours: "Haircut service after or before normal business hours.",
         vip: "This VIP service includes a haircut and beard grooming, a crispy lineup with enhancements, a facial massage with steamer, a black or gold face mask, and a relaxing hot towel treatment.",

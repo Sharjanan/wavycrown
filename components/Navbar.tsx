@@ -67,21 +67,20 @@ export default function Navbar() {
           </div>
 
           {/* CTA Button - top right */}
-          <div className="z-50 flex items-center gap-1">
-  <SocialMedia className="text-white"  />
-  <Button
-    variant="gold"
-    size="pill"
-    onClick={() => setOpen(true)}
-  >
-    {t.button[lang].split("\n").map((line, i) => (
-      <span key={i}>
-        {line}
-        <br />
-      </span>
-    ))}
-  </Button>
-</div>
+          <div className={`z-50 gap-1 ${
+          isMobileMenuOpen ? "hidden" : " hidden md:flex md:items-center"
+        }`}
+      >
+            <SocialMedia className="text-white" />
+            <Button variant="gold" size="pill" onClick={() => setOpen(true)}>
+              {t.button[lang].split("\n").map((line, i) => (
+                <span key={i}>
+                  {line}
+                  <br />
+                </span>
+              ))}
+            </Button>
+          </div>
         </div>
       </header>
       {/* Popup dialog */}
@@ -91,26 +90,28 @@ export default function Navbar() {
             <DialogTitle>Contact Options</DialogTitle>
           </VisuallyHidden>
 
-          <h2 className="text-3xl font-bold text-white uppercase">book your session</h2>
-           <Image
-                src="/sky_distric_black_bg.png"
-                alt="WavyCrown Logo"
-                width={250}
-                height={250}
-                className="cursor-pointer justify-center mx-auto"
-              />     
+          <h2 className="text-3xl font-bold text-white uppercase">
+            book your session
+          </h2>
+          <Image
+            src="/sky_distric_black_bg.png"
+            alt="WavyCrown Logo"
+            width={250}
+            height={250}
+            className="cursor-pointer justify-center mx-auto"
+          />
           <div className="flex flex-row justify-center gap-8">
             {/* Call Us button */}
             <a href="tel:+15149249154">
-              <Button variant="gold" size="pill" >
-                 Call Us at (514) 924-9154
+              <Button variant="gold" size="pill">
+                Call Us at (514) 924-9154
               </Button>
             </a>
 
             {/* Book Online button */}
             <a href="#booking">
-              <Button variant="gold" size="pill"  onClick={() => setOpen(false)}>
-                 Book Online
+              <Button variant="gold" size="pill" onClick={() => setOpen(false)}>
+                Book Online
               </Button>
             </a>
           </div>
@@ -118,7 +119,7 @@ export default function Navbar() {
       </Dialog>
       {/* Slide-in drawer menu from left */}
       <div
-        className={`fixed top-0 left-0 h-full w-64 bg-white text-black font-bold uppercase z-50 transform transition-transform duration-300 ${
+        className={`fixed top-0 left-0 h-full w-64 bg-white text-black font-bold  z-50 transform transition-transform duration-300 ${
           isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -146,39 +147,23 @@ export default function Navbar() {
               key={href}
               href={href}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="hover:text-gold"
+              className="hover:text-gold  text-5xl font-lostinsouth"
             >
               {label}
             </Link>
           ))}
-          
-          <div className="flex items-center gap-2 mt-4">
-           <SocialMedia className="text-black" />
-          </div>
 
-          <DropdownMenu>
-            <DropdownMenuTrigger className="border border-gold px-3 rounded hover:bg-gold hover:text-gold transition">
-              {lang === "en" ? "English" : "Français"}
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-black border-gold text-gold">
-              <DropdownMenuItem
-                onClick={() => {
-                  setLang("en");
-                  setIsMobileMenuOpen(false);
-                }}
-              >
-                 English
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => {
-                  setLang("fr");
-                  setIsMobileMenuOpen(false);
-                }}
-              >
-                 Français
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <div className="flex items-center gap-2 mt-8">
+            <SocialMedia className="text-black" />
+          </div>
+          <div className="mt-auto flex justify-center">
+          <button
+            onClick={() => setLang(lang === "en" ? "fr" : "en")}
+            className="text-3xl rounded hover:text-gold transition font-lostinsouth"
+          >
+            {lang === "en" ? "Français" : "English"}
+          </button>
+          </div>
         </div>
       </div>
     </>
