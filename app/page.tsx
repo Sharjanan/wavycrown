@@ -9,10 +9,15 @@ import { useState } from "react";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 export default function Home() {
+  
   const { lang } = useLanguage();
   const t = translations.home;
+  const s = translations.schedule;
   const [open, setOpen] = useState(false);
   const [activeLink, setActiveLink] = useState<string | null>(null);
+  const titleWords = s.title[lang].split(' ');
+const our = titleWords.slice(0, -1).join(' ');
+const schedule = titleWords.at(-1);
   const services = [
     {
       title: translations.services[lang].haircut,
@@ -98,24 +103,26 @@ export default function Home() {
       {/*  Section Separator */}
       {/* <div className="relative mt-20 h-[4px] w-full text-gold border-b-1 border-gold glow-gold"></div> */}
       {/* Our Schedule Section */}
+      
 <section className="py-16 px-4 z-50 bg-black text-white border-y border-gold">
   <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 ">
-    {/* Title */}
+    {/* Title */} 
+                  
     <div className="flex justify-end">
-      <h2 className="text-5xl font-extrabold">
-        OUR <span className="text-gold">SCHEDULE</span>
+      <h2 className="text-5xl font-extrabold uppercase">
+      {our} <span className="text-gold">{schedule}</span>
       </h2>
     </div>
 
     {/* Weekdays */}
     <div className="flex flex-col whitespace-nowrap">
-      <h2 className="text-4xl font-semibold ">MONDAY TO FRIDAY</h2>
+      <h2 className="text-4xl font-semibold ">{s.weekdays[lang]}</h2>
       <h2 className="text-3xl">9:00 – 21:00</h2>
     </div>
 
     {/* Weekends */}
     <div className="flex flex-col ">
-      <h2 className="text-4xl font-semibold">SATURDAY</h2>
+      <h2 className="text-4xl font-semibold">{s.weekends[lang]}</h2>
       <h2 className="text-3xl">9:00 – 17:00</h2>
     </div>
   </div>

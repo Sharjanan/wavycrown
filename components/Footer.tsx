@@ -3,7 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { LocationHome, Telephone } from "@mynaui/icons-react";
 import SocialMedia from "./ui/SocialMedia";
+import { translations } from "@/components/lang"
+import { useLanguage } from "@/components/LanguageContext";;
 export default function Footer() {
+    const { lang } = useLanguage();
+    const f = translations.footer;
   return (
     <footer className="w-full bg-black text-gold border-t border-gold py-10">
       <div className="max-w-6xl mx-auto grid grid-cols-3 items-center px-4">
@@ -11,7 +15,7 @@ export default function Footer() {
         <div className="flex flex-col items-start space-y-3">
           <div className="flex items-center gap-2">
             <LocationHome className="text-gold" />
-            <p className="text-white">Address will be given after booked appointment</p>
+            <p className="text-white">{f.address[lang]}</p>
           </div>
           <div className="flex items-center gap-2">
             <Telephone className="text-gold" />

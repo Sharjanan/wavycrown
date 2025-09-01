@@ -12,7 +12,7 @@ export const translations = {
     },
     button: {
       en: "Book Now",
-      fr: "Réserver\nmaintenant",
+      fr: "Réserver\nMaintenant",
     },
     explore_button:{
       en: "Explore Service",
@@ -28,6 +28,26 @@ export const translations = {
     booking: {
       en: "Book Now",
       fr: "Réserver Maintenant",
+    },
+  },
+  footer: {
+    address:{
+      en: "Address will be given after booked appointment",
+      fr: "L'adresse sera donnée après la réservation du rendez-vous",
+    },
+  },  
+  schedule:{
+    title:{
+      en: "Our Schedule",
+      fr: "Heures d'ouverture",
+    },
+    weekdays:{
+      en: "Monday - Friday",
+      fr: "Lundi - Vendredi",
+    },
+    weekends:{
+      en: "Saturday",
+      fr: "Samedi",
     },
   },
 
