@@ -7,7 +7,7 @@ import { TERipple } from "tw-elements-react";
 export function SocialMedia({ className = "" }: { className?: string }) {
   const baseClasses = `
       inline-block rounded-full p-3
-    shadow-md border border-gold
+    shadow-md border-3 border-gold
     transition duration-300 ease-in-out
     hover:shadow-lg focus:shadow-lg
     hover:bg-gold hover:text-white   /* gold on hover */
