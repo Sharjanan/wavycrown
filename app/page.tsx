@@ -98,20 +98,23 @@ export default function Home() {
       {/*  Section Separator */}
       {/* <div className="relative mt-20 h-[4px] w-full text-gold border-b-1 border-gold glow-gold"></div> */}
       {/* Our Schedule Section */}
-<section className="py-16 px-4 z-50 bg-black text-white  border-b border-t border-gold  md:grid-cols-3 gap-8">  
-  <div className="max-w-5xl mx-auto grid grid-cols-3 gap-60 ">
+<section className="py-16 px-4 z-50 bg-black text-white border-y border-gold">
+  <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 ">
     {/* Title */}
-    <div className="flex justify-start ">
-      <h2 className="text-5xl font-extrabold">OUR <span className="text-gold">SCHEDULE</span></h2>
+    <div className="flex justify-end">
+      <h2 className="text-5xl font-extrabold">
+        OUR <span className="text-gold">SCHEDULE</span>
+      </h2>
     </div>
+
     {/* Weekdays */}
-    <div className="flex flex-col  justify-start ">
-      <h2 className="text-4xl font-semibold whitespace-nowrap gap-5">MONDAY TO FRIDAY</h2>
+    <div className="flex flex-col whitespace-nowrap">
+      <h2 className="text-4xl font-semibold ">MONDAY TO FRIDAY</h2>
       <h2 className="text-3xl">9:00 – 21:00</h2>
     </div>
 
     {/* Weekends */}
-    <div className="flex flex-col justify-start">
+    <div className="flex flex-col ">
       <h2 className="text-4xl font-semibold">SATURDAY</h2>
       <h2 className="text-3xl">9:00 – 17:00</h2>
     </div>
