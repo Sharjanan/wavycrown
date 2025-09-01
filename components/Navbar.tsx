@@ -14,7 +14,7 @@ import { useLanguage } from "./LanguageContext";
 import { translations } from "@/components/lang";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import SocialMedia from "./ui/SocialMedia";
+import { SocialMedia } from "./ui/SocialMedia";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -68,7 +68,7 @@ export default function Navbar() {
 
           {/* CTA Button - top right */}
           <div className="z-50 flex items-center gap-1">
-  <SocialMedia />
+  <SocialMedia className="text-white"  />
   <Button
     variant="gold"
     size="pill"
@@ -153,7 +153,7 @@ export default function Navbar() {
           ))}
           
           <div className="flex items-center gap-2 mt-4">
-           <SocialMedia  />
+           <SocialMedia className="text-black" />
           </div>
 
           <DropdownMenu>

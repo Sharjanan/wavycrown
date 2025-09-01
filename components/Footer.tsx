@@ -36,7 +36,7 @@ export default function Footer() {
 
         {/* Right: Social Media */}
         <div className="flex justify-end gap-1">
-          <SocialMedia />
+          <SocialMedia className="text-white" />
         </div>
       </div>
     </footer>
