@@ -14,6 +14,7 @@ import { useLanguage } from "./LanguageContext";
 import { translations } from "@/components/lang";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import SocialMedia from "./ui/SocialMedia";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -23,13 +24,13 @@ export default function Navbar() {
   const t = translations.home;
   const navLinks = [
     // { href: "/calendar", label: "Calendar" },
-    { href: "#services", label: "Services" },
+
     { href: "#booking", label: lang === "en" ? "Book Now" : "Réserver" },
   ];
   return (
     <>
       <header
-        className={`fixed top-0 left-0 py-10 w-full bg-black text-gold z-50 transition-transform shadow-md border-b border-gold `}
+        className={`fixed top-0 left-0 py-10 w-full bg-black text-gold z-50 transition-transform  border-b border-gold `}
       >
         <div className="flex items-center justify-between w-full px-4 py-3 relative">
           {/* Hamburger - always visible on left */}
@@ -66,18 +67,21 @@ export default function Navbar() {
           </div>
 
           {/* CTA Button - top right */}
-          <div className="z-50">
-            
-              <Button variant="gold" size="pill" onClick={() => setOpen(true)}>
-                {t.button[lang].split("\n").map((line, i) => (
-                  <span key={i}>
-                    {line}
-                    <br />
-                  </span>
-                ))}
-              </Button>
-         
-          </div>
+          <div className="z-50 flex items-center gap-1">
+  <SocialMedia />
+  <Button
+    variant="gold"
+    size="pill"
+    onClick={() => setOpen(true)}
+  >
+    {t.button[lang].split("\n").map((line, i) => (
+      <span key={i}>
+        {line}
+        <br />
+      </span>
+    ))}
+  </Button>
+</div>
         </div>
       </header>
       {/* Popup dialog */}
@@ -147,6 +151,10 @@ export default function Navbar() {
               {label}
             </Link>
           ))}
+          
+          <div className="flex items-center gap-2 mt-4">
+           <SocialMedia  />
+          </div>
 
           <DropdownMenu>
             <DropdownMenuTrigger className="border border-gold px-3 rounded hover:bg-gold hover:text-gold transition">

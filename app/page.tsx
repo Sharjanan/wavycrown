@@ -98,21 +98,21 @@ export default function Home() {
       {/*  Section Separator */}
       {/* <div className="relative mt-20 h-[4px] w-full text-gold border-b-1 border-gold glow-gold"></div> */}
       {/* Our Schedule Section */}
-<section className="py-16 px-4 z-50 bg-black text-white  border-b border-t border-gold">  
-  <div className="max-w-5xl mx-auto grid grid-cols-3 text-center">
+<section className="py-16 px-4 z-50 bg-black text-white  border-b border-t border-gold  md:grid-cols-3 gap-8">  
+  <div className="max-w-5xl mx-auto grid grid-cols-3 gap-60 ">
     {/* Title */}
-    <div className="flex items-center justify-center">
-      <h2 className="text-3xl font-extrabold">OUR <span className="text-gold">SCHEDULE</span></h2>
+    <div className="flex justify-start ">
+      <h2 className="text-5xl font-extrabold">OUR <span className="text-gold">SCHEDULE</span></h2>
     </div>
     {/* Weekdays */}
-    <div className="flex flex-col items-center justify-center">
-      <h2 className="text-3xl font-semibold font-lostinsouth">MONDAY TO FRIDAY</h2>
+    <div className="flex flex-col  justify-start ">
+      <h2 className="text-4xl font-semibold whitespace-nowrap gap-5">MONDAY TO FRIDAY</h2>
       <h2 className="text-3xl">9:00 – 21:00</h2>
     </div>
 
     {/* Weekends */}
-    <div className="flex flex-col items-center justify-center">
-      <h2 className="text-3xl font-semibold">SATURDAY</h2>
+    <div className="flex flex-col justify-start">
+      <h2 className="text-4xl font-semibold">SATURDAY</h2>
       <h2 className="text-3xl">9:00 – 17:00</h2>
     </div>
   </div>
@@ -156,13 +156,13 @@ export default function Home() {
             </div>
 
             {/* Right column - photo */}
-            <div className="flex justify-center sm:justify-end">
+            {/* <div className="flex justify-center sm:justify-end">
               <img
                 src={'vercel.svg'} // adjust path / naming convention
                 alt={service.title}
                 className="w-full max-w-xs rounded-lg border border-gold shadow-[0_0_15px_rgba(212,175,55,0.6)]"
               />
-            </div>
+            </div> */}
           </div>
         </CardContent>
             </Card>

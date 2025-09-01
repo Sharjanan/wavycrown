@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "tw-elements-react/dist/plugin.cjs";
 
 .hero-bg {
   background-image: url("/sky_2.jpg");
@@ -20,12 +21,12 @@
 }
 @theme {
   --color-gold: #F4CD8A;
-  --color-black: #0a0a0a;
+  --color-black: #000000;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #000000;
     --foreground: #ededed;
   }
 }
