@@ -56,7 +56,7 @@ export default function LoadingScreen() {
             height={250}
             
           />
-          <h1 className="text-4xl font-semibold tracking-wide ">
+          <h1 className="text-6xl font-semibold tracking-wide font-lostinsouth ">
             {letters.slice(0, visibleLetters).join("")}
             <span className="animate-pulse">...</span>
           </h1>
