@@ -8,8 +8,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: "var(--font-poppins)",
-        display: "var(--font-playfair)",
+        sans: ["var(--font-poppins)"],      // maps to Poppins
+        display: ["var(--font-playfair)"], // maps to Playfair
+      lostinsouth: ["var(--font-lostinsouth)"], // maps to Lost in South
       },
       colors: {
         gold: "#F4CD8A",

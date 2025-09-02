@@ -43,13 +43,20 @@ export default function LoadingScreen() {
           className="min-h-screen bg-black flex flex-col items-center justify-center text-white"
         >
           <Image
-            src="/wavycrownbluebglogo.png"
+            src="/wavycrown.png"
+            alt="WavyCrown Logo"
+            width={500}
+            height={500}
+            className="-mb-30"
+          />
+           <Image
+            src="/sky_distric_black_bg.png"
             alt="WavyCrown Logo"
             width={250}
             height={250}
-            className="mb-6"
+            
           />
-          <h1 className="text-4xl font-semibold tracking-wide ">
+          <h1 className="text-6xl font-semibold tracking-wide font-lostinsouth ">
             {letters.slice(0, visibleLetters).join("")}
             <span className="animate-pulse">...</span>
           </h1>
