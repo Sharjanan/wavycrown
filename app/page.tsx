@@ -23,38 +23,38 @@ const schedule = titleWords.at(-1);
       title: translations.services[lang].haircut,
       price: translations.services[lang].price.haircut,
       description: translations.services[lang].descriptions.haircut,
-      link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/ADMBGK35RBFXVLZGOZO5UOH6",
+      link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LTG4FHPV97G6G/services/ADMBGK35RBFXVLZGOZO5UOH6",
       image: "/services/mahan.png",
     },
     {
       title: translations.services[lang].haircut_beard,
       price: translations.services[lang].price.haircut_beard,
       description: translations.services[lang].descriptions.haircut_beard,
-      link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/V7RQQCD6JUDXBYIKIDS24TKY",
+      link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LTG4FHPV97G6G/services/V7RQQCD6JUDXBYIKIDS24TKY",
       image: "/services/mahan.png",
     },
     // {
     //   title: translations.services[lang].after_hours,
     //   price: translations.services[lang].price.after_hours,
     //   description: translations.services[lang].descriptions.after_hours,
-    //   link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/EU2ZSC6VZHKC6S4VDE2EDQFC",
+    //   link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LTG4FHPV97G6G/services/2TF6OLBYKZPUNBFGDFRB7HAU",
     //   image: "/services/mahan.png",
     // },
     {
       title: translations.services[lang].vip,
       price: translations.services[lang].price.vip,
       description: translations.services[lang].descriptions.vip,
-      link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/2TF6OLBYKZPUNBFGDFRB7HAU",
+      link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LTG4FHPV97G6G/services/2TF6OLBYKZPUNBFGDFRB7HAU",
       image: "/services/mahan.png",
     },
 
-    {
-      title: translations.services[lang].house_call,
-      price: translations.services[lang].price.house_call,
-      description: translations.services[lang].descriptions.house_call,
-      link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/W2QHA46QPMZ67V44ZLQSX3KR",
-      image: "/services/mahan.png",
-    },
+    // {
+    //   title: translations.services[lang].house_call,
+    //   price: translations.services[lang].price.house_call,
+    //   description: translations.services[lang].descriptions.house_call,
+    //   link: "https://book.squareup.com/appointments/a8nib68p80o9f3/location/LJV25SAZCZRD6/services/W2QHA46QPMZ67V44ZLQSX3KR",
+    //   image: "/services/mahan.png",
+    // },
   ];
   const handleOpen = (link: string) => {
     setActiveLink(link);
