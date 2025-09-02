@@ -1,15 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
 import { useLanguage } from "./LanguageContext";
 import { translations } from "@/components/lang";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
@@ -19,7 +13,6 @@ import { SocialMedia } from "./ui/SocialMedia";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { lang, setLang } = useLanguage();
-  const [showNavbar, setShowNavbar] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const t = translations.home;
   const navLinks = [
