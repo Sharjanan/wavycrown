@@ -35,7 +35,16 @@ export const translations = {
       en: "Address will be given after booked appointment",
       fr: "L'adresse sera donnée après la réservation du rendez-vous",
     },
+    phone:{
+      en: "Phone Number",
+      fr: "Numéro de Téléphone",
+    },
+    location:{
+      en: "Location",
+      fr: "Adresse",
+    },
   },  
+
   schedule:{
     title:{
       en: "Our Schedule",
