@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "tw-elements-react/dist/plugin.cjs";
 
 .hero-bg {
   background-image: url("/sky_2.jpg");
@@ -18,10 +19,14 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
+@theme {
+  --color-gold: #F4CD8A;
+  --color-black: #000000;
+}
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #000000;
     --foreground: #ededed;
   }
 }
@@ -29,10 +34,12 @@
 body {
   background: var(--background);
   color: var(--foreground);
-   font-family: var(--font-playfair);
+  font-family: var(--font-playfair);
 }
 
-
+.font-lostinsouth {
+  font-family: var(--font-lostinsouth);
+}
 .text-gold {
   color: #F4CD8A;
 }
@@ -50,5 +57,5 @@ body {
 }
 
 .glow-gold {
-  box-shadow: 0 0 10px #F4CD8A, 0 0 20px #F4CD8A;
+  box-shadow: 0 0 15px #F4CD8A
 }
