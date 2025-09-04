@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @plugin "tw-elements-react/dist/plugin.cjs";
-
+@import "leaflet/dist/leaflet.css";
 .hero-bg {
   background-image: url("/sky_2.jpg");
   background-size: cover;
@@ -58,4 +58,23 @@ body {
 
 .glow-gold {
   box-shadow: 0 0 15px #F4CD8A
+}
+/* Root element that Leaflet positions (do NOT animate this) */
+.leaflet-location-pin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Animate only the inner wrapper */
+.pin-wrap.pin-drop {
+  animation: pinDrop 500ms ease-out forwards;
+  transform-origin: bottom center;
+  will-change: transform;
+}
+
+@keyframes pinDrop {
+  0%   { transform: translateY(-160px) scale(0.9); }
+  75%  { transform: translateY(8px)    scale(1.05); }
+  100% { transform: translateY(0)      scale(1);    }
 }

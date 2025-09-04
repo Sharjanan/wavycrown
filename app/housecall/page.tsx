@@ -1,11 +1,10 @@
 
 'use client';
 
-import 'leaflet/dist/leaflet.css';
+
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import AddressForm from './AddressForm';
-
 const HousecallMap = dynamic(() => import('./HousecallMap'), { ssr: false });
 
 export default function HousecallPage() {
@@ -13,9 +12,9 @@ export default function HousecallPage() {
   const [displayAddress, setDisplayAddress] = useState<string>('');
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white to-slate-50">
-      <section className="max-w-4xl mx-auto px-4 pt-10 pb-4">
-        <h1 className="text-3xl md:text-4xl font-semibold text-teal-600 text-center">
+<main className="min-h-screen bg-gradient-to-b from-black via-white to-black">   
+     <section className="relative mt-50 max-w-4xl mx-auto px-4 pt-10 pb-4">
+        <h1 className="text-3xl md:text-4xl font-semibold text-gold text-center">
           Step 1: Type Your Address
         </h1>
 

@@ -3,9 +3,17 @@ import "./globals.css";
 import ClientLayout from "@/components/ClientLayout";
 import { Playfair_Display, Poppins } from "next/font/google";
 import localFont from "next/font/local";
+import PlacesProvider from "./PlacesProvider";
 
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
-const poppins  = Poppins({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-poppins" });
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+});
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-poppins",
+});
 
 const lostInSouth = localFont({
   src: "./fonts/LostInSouth.ttf",
@@ -18,7 +26,11 @@ export const metadata: Metadata = {
   description: "Barber booking app",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html
       lang="en"
@@ -26,7 +38,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <body className="bg-black text-white" suppressHydrationWarning>
-        <ClientLayout>{children}</ClientLayout>
+        <PlacesProvider>
+          <ClientLayout>{children}</ClientLayout>
+        </PlacesProvider>
       </body>
     </html>
   );

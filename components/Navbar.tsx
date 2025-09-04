@@ -16,7 +16,7 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const t = translations.home;
   const navLinks = [
-    { href: "/HouseCall", label: "House Call" },
+    { href: "/housecall", label: "House Call" },
     { href: "#booking", label: lang === "en" ? "Book Now" : "Réserver" },
   ];
   return (

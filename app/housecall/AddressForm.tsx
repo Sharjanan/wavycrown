@@ -1,172 +1,183 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { Autocomplete } from '@react-google-maps/api';
+// Use global google.maps.Autocomplete type instead of importing
+type GAuto = google.maps.places.Autocomplete;
+import { Search, Send  } from '@mynaui/icons-react';
+import { useLanguage } from '@/components/LanguageContext';
 
 type Props = {
   onGeocode: (lat: number, lng: number, label: string) => void;
 };
 
-type Suggestion = {
-  display_name: string;
-  lat: string;
-  lon: string;
-};
+/* ---------------- Cookie helpers ---------------- */
+function setCookie(name: string, value: string, days = 30) {
+  const d = new Date();
+  d.setTime(d.getTime() + days * 864e5);
+  document.cookie = `${name}=${encodeURIComponent(value)};expires=${d.toUTCString()};path=/;SameSite=Lax`;
+}
+function getCookie(name: string) {
+  const key = `${name}=`;
+  return (
+    document.cookie
+      .split(';')
+      .map((c) => c.trim())
+      .find((c) => c.startsWith(key))
+      ?.slice(key.length) ?? null
+  );
+}
+/* ------------------------------------------------ */
 
 export default function AddressForm({ onGeocode }: Props) {
+  const { lang } = useLanguage();
+  const placeholder = lang === 'fr' ? 'Entrez votre adresse' : 'Type your address here';
+
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
-  const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
-  const [open, setOpen] = useState(false);
-  const [highlight, setHighlight] = useState(0);
 
-  // NOTE: this is a DIV ref now, and we'll attach it to a wrapper <div>, not the <form>
   const boxRef = useRef<HTMLDivElement>(null);
-  const abortRef = useRef<AbortController | null>(null);
+  const autoRef = useRef<GAuto | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
-  // Debounced suggestion search (Nominatim)
+  // Greater Montréal bounding box (soft bias)
+  const mtlBoundsRef = useRef<google.maps.LatLngBounds | null>(null);
   useEffect(() => {
-    if (!query.trim()) {
-      setSuggestions([]);
-      setOpen(false);
-      return;
+    if (!mtlBoundsRef.current && typeof window !== 'undefined' && window.google?.maps) {
+      mtlBoundsRef.current = new google.maps.LatLngBounds(
+        { lat: 45.30, lng: -74.10 }, // SW
+        { lat: 45.80, lng: -73.30 }  // NE
+      );
     }
-    const t = setTimeout(async () => {
-      try {
-        abortRef.current?.abort();
-        const ac = new AbortController();
-        abortRef.current = ac;
-
-        const url = new URL('https://nominatim.openstreetmap.org/search');
-        url.searchParams.set('q', query);
-        url.searchParams.set('format', 'json');
-        url.searchParams.set('addressdetails', '1');
-        url.searchParams.set('limit', '5');
-
-        const res = await fetch(url.toString(), {
-          headers: { 'Accept-Language': 'en' },
-          signal: ac.signal,
-        });
-        const data: Suggestion[] = await res.json();
-        setSuggestions(data);
-        setOpen(data.length > 0);
-        setHighlight(0);
-      } catch {
-        /* ignore */
-      }
-    }, 250);
-
-    return () => clearTimeout(t);
-  }, [query]);
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    function onDocClick(e: MouseEvent) {
-      if (!boxRef.current) return;
-      if (!boxRef.current.contains(e.target as Node)) setOpen(false);
-    }
-    document.addEventListener('click', onDocClick);
-    return () => document.removeEventListener('click', onDocClick);
   }, []);
 
-  async function geocodeAddress(input?: string) {
-    const q = (input ?? query).trim();
-    if (!q) return;
-    setLoading(true);
-    try {
-      const url = new URL('https://nominatim.openstreetmap.org/search');
-      url.searchParams.set('q', q);
-      url.searchParams.set('format', 'json');
-      url.searchParams.set('addressdetails', '1');
-      url.searchParams.set('limit', '1');
+  // Format short address: "123 Main St, City, QC, H1A 2B3, Canada"
+  const formatShort = useCallback((place: google.maps.places.PlaceResult) => {
+    const comps = place.address_components ?? [];
+    const get = (type: string) => comps.find((c) => c.types.includes(type));
+    const num = get('street_number')?.short_name ?? '';
+    const route = get('route')?.short_name ?? '';
+    const city =
+      get('locality')?.short_name ||
+      get('sublocality')?.short_name ||
+      get('administrative_area_level_3')?.short_name ||
+      '';
+    const province = get('administrative_area_level_1')?.short_name ?? '';
+    const pc = get('postal_code')?.short_name ?? '';
+    const country = get('country')?.long_name ?? '';
 
-      const res = await fetch(url.toString(), {
-        headers: { 'Accept-Language': 'en' },
-      });
-      const data: Suggestion[] = await res.json();
-      if (Array.isArray(data) && data.length) {
-        const { lat, lon, display_name } = data[0];
-        onGeocode(parseFloat(lat), parseFloat(lon), display_name);
-        setOpen(false);
-      } else {
-        alert('Address not found. Try being more specific.');
-      }
-    } catch {
-      alert('Could not look up that address.');
-    } finally {
-      setLoading(false);
-    }
-  }
+    const line1 = [num, route].filter(Boolean).join(' ');
+    return [line1, city, province, pc, country].filter(Boolean).join(', ');
+  }, []);
 
-  function chooseSuggestion(s: Suggestion) {
-    setQuery(s.display_name);
-    onGeocode(parseFloat(s.lat), parseFloat(s.lon), s.display_name);
-    setOpen(false);
-  }
+  // When user picks a suggestion from Google
+  const handlePlace = useCallback(() => {
+    if (!autoRef.current) return;
+    const place = autoRef.current.getPlace();
+    const loc = place?.geometry?.location;
+    if (!loc) return;
 
-  function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (!open || suggestions.length === 0) return;
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      setHighlight((h) => Math.min(h + 1, suggestions.length - 1));
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      setHighlight((h) => Math.max(h - 1, 0));
-    } else if (e.key === 'Enter') {
-      e.preventDefault();
-      chooseSuggestion(suggestions[highlight]);
-    }
-  }
+    const lat = loc.lat();
+    const lng = loc.lng();
+    const label = formatShort(place) || place.formatted_address || place.name || '';
 
-  function onSubmit(e: React.FormEvent) {
+    setQuery(label);
+    onGeocode(lat, lng, label);
+    setCookie('lastAddress', JSON.stringify({ label, lat, lon: lng, ts: Date.now() }), 30);
+  }, [formatShort, onGeocode]);
+
+  // Submit (Enter or Send icon)
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    geocodeAddress();
-  }
+    if (!autoRef.current) return;
+
+    const place = (autoRef.current as any)?.getPlace?.();
+    if (place?.geometry?.location) {
+      handlePlace();
+      return;
+    }
+
+    // Fallback for free-typed query: use PlacesService
+    if (!window.google?.maps) return;
+    const svc = new google.maps.places.PlacesService(document.createElement('div'));
+    setLoading(true);
+    svc.findPlaceFromQuery(
+      {
+        query,
+        fields: ['name', 'formatted_address', 'geometry', 'address_components'],
+        // Bias to Montreal box; still returns QC/ON if relevant
+        locationBias: mtlBoundsRef.current ?? undefined,
+      },
+      (results, status) => {
+        setLoading(false);
+        if (status !== google.maps.places.PlacesServiceStatus.OK || !results?.length) return;
+        const r = results[0];
+        const lat = r.geometry!.location!.lat();
+        const lng = r.geometry!.location!.lng();
+        const label = formatShort(r) || r.formatted_address || r.name || query;
+        setQuery(label);
+        onGeocode(lat, lng, label);
+        setCookie('lastAddress', JSON.stringify({ label, lat, lon: lng, ts: Date.now() }), 30);
+      }
+    );
+  };
+
+  // Prefill from cookie on mount
+  useEffect(() => {
+    try {
+      const raw = getCookie('lastAddress');
+      if (!raw) return;
+      const parsed = JSON.parse(raw) as { label: string; lat: number; lon: number };
+      if (parsed?.label && typeof parsed.lat === 'number' && typeof parsed.lon === 'number') {
+        setQuery(parsed.label);
+        onGeocode(parsed.lat, parsed.lon, parsed.label);
+      }
+    } catch {}
+  }, [onGeocode]);
 
   return (
-    // Attach the div ref here, not on the form
     <div ref={boxRef} className="relative">
       <form onSubmit={onSubmit} className="flex flex-col gap-3 items-stretch">
         <div className="relative">
-          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-            {/* Replace with your icon system if needed */}
-            <span className="material-symbols-outlined text-slate-400">search</span>
+          {/* Left search icon with fixed width so text doesn't overlap */}
+          <div className="absolute inset-y-0 left-0 w-12 flex items-center justify-center pointer-events-none">
+            <Search />
           </div>
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={onKeyDown}
-            placeholder="Type your address here"
-            autoComplete="off"
-            className="w-full pl-12 pr-4 py-4 rounded-2xl border border-slate-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
-          />
-          {open && suggestions.length > 0 && (
-            <ul className="absolute z-20 mt-2 w-full bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden max-h-72 overflow-y-auto">
-              {suggestions.map((s, i) => (
-                <li
-                  key={`${s.lat}-${s.lon}-${i}`}
-                  onMouseDown={(e) => {
-                    e.preventDefault(); // keep focus
-                    chooseSuggestion(s);
-                  }}
-                  className={`px-4 py-3 cursor-pointer text-sm ${
-                    i === highlight ? 'bg-teal-50' : 'hover:bg-slate-50'
-                  }`}
-                >
-                  {s.display_name}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
 
-        <div className="flex gap-3">
+          {/* Google Places Autocomplete wraps the input */}
+          <Autocomplete
+            onLoad={(inst) => {
+              autoRef.current = inst;
+              inst.setOptions({
+                componentRestrictions: { country: ['ca'] },   // Canada only
+                fields: ['address_components', 'formatted_address', 'geometry', 'name'],
+                bounds: mtlBoundsRef.current ?? undefined,     // bias to Greater Montréal
+                strictBounds: false,                           // still allow QC/ON
+                types: ['address'],                            // focus on addresses
+              });
+            }}
+            onPlaceChanged={handlePlace}
+          >
+            <input
+              ref={inputRef}
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder={placeholder}
+              autoComplete="off"
+              className="w-full pl-12 pr-12 py-4 rounded-2xl border border-slate-200 shadow-sm
+                         focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold"
+            />
+          </Autocomplete>
+
+          {/* Right submit icon button */}
           <button
             type="submit"
+            aria-label="Show on Map"
             disabled={loading}
-            className="px-5 py-3 rounded-xl font-semibold bg-teal-600 text-white hover:bg-teal-700 disabled:opacity-60"
+            className="absolute inset-y-0 right-0 w-12 flex items-center justify-center
+                       hover:text-gold transition-transform duration-150 ease-out hover:scale-110 active:scale-95"
           >
-            {loading ? 'Searching…' : 'Show on Map'}
+            <Send />
           </button>
         </div>
       </form>
