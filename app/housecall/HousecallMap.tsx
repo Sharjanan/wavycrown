@@ -2,7 +2,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap, Pane  } from 'react-leaflet';
 import L, { LatLngExpression, DivIcon, Map as LeafletMap } from 'leaflet';
 import ReactDOMServer from 'react-dom/server';
 import { Location as LocationIcon } from '@mynaui/icons-react';
@@ -19,6 +19,7 @@ function FlyTo({ coords }: { coords: { lat: number; lng: number } | null }) {
   }, [coords, map]);
   return null;
 }
+
 
 export default function HousecallMap({ coords, addressLabel }: Props) {
   // 1) Mount guard (don’t early-return before hooks!)
@@ -37,14 +38,14 @@ export default function HousecallMap({ coords, addressLabel }: Props) {
   );
 
   return L.divIcon({
-    className: 'leaflet-location-pin', // root stays static
+    className: 'leaflet-location-pin', 
     html: `
       <div class="pin-wrap pin-drop">    
             ${svg}
       </div>
     `,
-    iconSize: [56, 56],      // matches outer circle
-    iconAnchor: [28, 56],    // bottom-center (use full height here)
+    iconSize: [56, 56],    
+    iconAnchor: [28, 56],    
     popupAnchor: [0, -56],
   });
 }, []);
@@ -70,11 +71,22 @@ export default function HousecallMap({ coords, addressLabel }: Props) {
           scrollWheelZoom
           style={{ height: '100%', width: '100%' }}
           className="z-0"
+            attributionControl={false}   
+
+          
         >
           <TileLayer
-            attribution="&copy; OpenStreetMap contributors"
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            url="https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png"
+            attribution='&copy; OpenStreetMap contributors &copy; CARTO'
+            
           />
+          <Pane name="labels" style={{ zIndex: 650, pointerEvents: 'none' }}>
+            <TileLayer
+              url="https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png"
+              attribution='&copy; OpenStreetMap contributors &copy; CARTO'
+              pane="labels"
+            />
+          </Pane>
           {position && (
             <Marker position={position} icon={pinIcon}>
               <Popup>{addressLabel || 'Selected location'}</Popup>
