@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Autocomplete } from '@react-google-maps/api';
 // Use global google.maps.Autocomplete type instead of importing
 type GAuto = google.maps.places.Autocomplete;
-import { Search, Send  } from '@mynaui/icons-react';
+import { Search, Send, XCircle   } from '@mynaui/icons-react';
 import { useLanguage } from '@/components/LanguageContext';
 
 type Props = {

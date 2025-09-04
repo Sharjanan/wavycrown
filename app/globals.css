@@ -60,19 +60,16 @@ body {
   box-shadow: 0 0 15px #F4CD8A
 }
 /* Root element that Leaflet positions (do NOT animate this) */
-.leaflet-location-pin {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.mapboxgl-ctrl-logo,
+.mapboxgl-ctrl-attrib {
+  display: none !important; /* hide logo/attribution (⚠️ keep your own attribution in footer) */
 }
 
-/* Animate only the inner wrapper */
-.pin-wrap.pin-drop {
+/* Optional: drop animation for marker */
+.drop-pin {
   animation: pinDrop 500ms ease-out forwards;
   transform-origin: bottom center;
-  will-change: transform;
 }
-
 @keyframes pinDrop {
   0%   { transform: translateY(-160px) scale(0.9); }
   75%  { transform: translateY(8px)    scale(1.05); }
