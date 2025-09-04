@@ -26,6 +26,7 @@ export default function HousecallMap({ coords }: Props) {
       speed: 1.2,
       curve: 1,
       essential: true,
+       padding: { top: 200, bottom: 0, left: 0, right: 0 }, 
     });
   }, [coords, ready]);
 
