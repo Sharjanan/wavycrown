@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Autocomplete } from '@react-google-maps/api';
 // Use global google.maps.Autocomplete type instead of importing
 type GAuto = google.maps.places.Autocomplete;
-import { Search, Send, XCircle   } from '@mynaui/icons-react';
+import { Search, Send, XCircle } from '@mynaui/icons-react';
 import { useLanguage } from '@/components/LanguageContext';
 
 type Props = {
@@ -132,15 +132,15 @@ export default function AddressForm({ onGeocode }: Props) {
         setQuery(parsed.label);
         onGeocode(parsed.lat, parsed.lon, parsed.label);
       }
-    } catch {}
+    } catch { }
   }, [onGeocode]);
 
   return (
     <div ref={boxRef} className="relative">
       <form onSubmit={onSubmit} className="flex flex-col gap-3 items-stretch">
-        <div className="relative">
+        <div className="relative text-black">
           {/* Left search icon with fixed width so text doesn't overlap */}
-          <div className="absolute inset-y-0 left-0 w-12 flex items-center justify-center pointer-events-none">
+          <div className="absolute text-black inset-y-0 left-0 w-12 flex items-center justify-center pointer-events-none">
             <Search />
           </div>
 
@@ -174,7 +174,7 @@ export default function AddressForm({ onGeocode }: Props) {
             type="submit"
             aria-label="Show on Map"
             disabled={loading}
-            className="absolute inset-y-0 right-0 w-12 flex items-center justify-center
+            className="absolute text-black inset-y-0 right-0 w-12 flex items-center justify-center
                        hover:text-gold transition-transform duration-150 ease-out hover:scale-110 active:scale-95"
           >
             <Send />

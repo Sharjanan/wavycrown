@@ -1,36 +1,36 @@
 // app/housecall/HousecallMap.tsx
 'use client';
 
-import { useEffect, useRef } from 'react';
-import Map, { Marker, NavigationControl } from 'react-map-gl/maplibre';
+import { useEffect, useRef, useState } from 'react';
+import Map, { Marker, MapRef } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';
-import { LocationUserSolid    as LocationIcon } from '@mynaui/icons-react';
+import { LocationUserSolid as LocationIcon } from '@mynaui/icons-react';
 
 type Props = {
   coords: { lat: number; lng: number } | null;
-  addressLabel?: string;
 };
 
-export default function HousecallMap({ coords, addressLabel }: Props) {
-  const mapRef = useRef<any>(null);
+export default function HousecallMap({ coords }: Props) {
+  const mapRef = useRef<MapRef | null>(null);
+  const [ready, setReady] = useState(false);
 
   const initial = coords ?? { lat: 45.5019, lng: -73.5674 };
 
-  // Auto-fly when coords update
+  // Only fly after map has loaded
   useEffect(() => {
-    if (coords && mapRef.current) {
-      mapRef.current.flyTo({
-        center: [coords.lng, coords.lat],
-        zoom: 16,
-        speed: 1.2,
-        curve: 1,
-        essential: true,
-      });
-    }
-  }, [coords]);
+    if (!ready || !coords || !mapRef.current) return;
+    const map = mapRef.current.getMap();
+    map.flyTo({
+      center: [coords.lng, coords.lat],
+      zoom: 16,
+      speed: 1.2,
+      curve: 1,
+      essential: true,
+    });
+  }, [coords, ready]);
 
   return (
-    <div style={{ height: 420, width: '100%' }}>
+    <div className="w-full h-full">
       <Map
         ref={mapRef}
         initialViewState={{
@@ -39,11 +39,10 @@ export default function HousecallMap({ coords, addressLabel }: Props) {
           zoom: 13,
         }}
         mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
-        attributionControl={false}  // hide default attribution box
+        attributionControl={false}
+        onLoad={() => setReady(true)}   // ✅ safe to interact
+        reuseMaps                       // avoids multiple mounts in dev
       >
-        {/* optional zoom buttons */}
-        {/* <NavigationControl position="top-right" /> */}
-
         {coords && (
           <Marker longitude={coords.lng} latitude={coords.lat} anchor="bottom">
             <div className="drop-pin flex items-center justify-center">

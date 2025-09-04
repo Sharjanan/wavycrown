@@ -1,43 +1,48 @@
-
+// app/housecall/page.tsx
 'use client';
-
 
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import AddressForm from './AddressForm';
+
 const HousecallMap = dynamic(() => import('./HousecallMap'), { ssr: false });
 
 export default function HousecallPage() {
   const [coords, setCoords] = useState<{ lat: number; lng: number } | null>(null);
-  const [displayAddress, setDisplayAddress] = useState<string>('');
 
   return (
-<main className="min-h-screen bg-gradient-to-b from-black via-white to-black">   
-     <section className="relative mt-50 max-w-4xl mx-auto px-4 pt-10 pb-4">
-        <h1 className="text-3xl md:text-4xl font-semibold text-gold text-center">
+    <main className="fixed inset-0 h-screen w-screen overflow-hidden pt-16">
+      {/* Fullscreen background map */}
+      <div className="absolute inset-0 -z-10">
+        <HousecallMap coords={coords} />
+      </div>
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-250
+                      bg-gradient-to-b from-black via-black/50 to-transparent -z-0" />
+
+      {/* Content overlay */}
+      <section className="relative max-w-3xl mx-auto px-4 pt-32">
+        <h1 className="text-3xl md:text-4xl font-semibold text-gold text-center drop-shadow-md">
           Step 1: Type Your Address
         </h1>
 
-        <div className="mt-6">
+        <div className="mt-6 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-1">
           <AddressForm
             onGeocode={(lat, lng, label) => {
               setCoords({ lat, lng });
-              setDisplayAddress(label);
             }}
           />
         </div>
       </section>
 
-      <section className="max-w-5xl mx-auto px-4 pb-14">
-        <div className="rounded-2xl shadow-lg overflow-hidden border border-slate-200">
-          <HousecallMap coords={coords} addressLabel={displayAddress} />
-        </div>
-        {displayAddress && (
-          <p className="text-center text-sm text-slate-600 mt-3">
-            Selected address: <span className="font-medium">{displayAddress}</span>
-          </p>
-        )}
-      </section>
+      {/* Next button pinned near bottom */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+        <button
+          className="px-40 py-3 rounded-xl font-semibold bg-gold text-black 
+                     hover:bg-black hover:text-gold transition-colors shadow-lg"
+        >
+          Next
+        </button>
+      </div>
     </main>
   );
 }
