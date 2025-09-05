@@ -14,7 +14,7 @@ export default function HousecallMap({ coords }: Props) {
   const mapRef = useRef<MapRef | null>(null);
   const [ready, setReady] = useState(false);
 
-  const initial = coords ?? { lat: 45.5019, lng: -73.5674 };
+  const initial = coords ?? { lat: 45.5603913, lng: -73.6679773 };
 
   // Only fly after map has loaded
   useEffect(() => {
@@ -37,7 +37,7 @@ export default function HousecallMap({ coords }: Props) {
         initialViewState={{
           longitude: initial.lng,
           latitude: initial.lat,
-          zoom: 13,
+          zoom: 9,
         }}
         mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
         attributionControl={false}
