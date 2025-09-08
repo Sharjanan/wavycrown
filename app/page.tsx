@@ -109,7 +109,7 @@ const schedule = titleWords.at(-1);
     {/* Title */} 
                   
     <div className="flex justify-end">
-      <h2 className="text-5xl font-extrabold uppercase">
+      <h2 className="text-5xl font-extrabold uppercase text-right">
       {our} <span className="text-gold">{schedule}</span>
       </h2>
     </div>
