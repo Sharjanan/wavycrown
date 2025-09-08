@@ -64,8 +64,8 @@ const handleLanguageChange = () => {
               <Image
                 src="/sky_avenue_black_bg.png"
                 alt="WavyCrown Logo"
-                width={250}
-                height={250}
+                width={300}
+                height={300}
                 className="cursor-pointer"
               />
             </Link>
@@ -143,15 +143,15 @@ const handleLanguageChange = () => {
           </button>
 
           {/* Logo inside drawer (optional, can remove if redundant) */}
-          <Link href="/">
-            <Image
-              src="/sky_avenue_white_bg.png"
-              alt="WavyCrown Logo"
-              width={250}
-              height={250}
-              className="cursor-pointer"
-            />
-          </Link>
+         <Link href="/">
+  <Image
+    src="/sky_avenue_white_bg.png"
+    alt="WavyCrown Logo"
+    width={300}
+    height={300}
+    className="cursor-pointer w-full h-auto max-w-xs mx-auto"
+  />
+</Link>
 
           {navLinks.map(({ href, label }) => (
             <Link

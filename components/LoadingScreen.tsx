@@ -45,15 +45,15 @@ export default function LoadingScreen() {
           <Image
             src="/wavycrown.png"
             alt="WavyCrown Logo"
-            width={500}
-            height={500}
-            className="-mb-30"
+            width={400}
+            height={400}
+            className="-mb-40"
           />
            <Image
             src="/sky_avenue_black_bg.png"
             alt="WavyCrown Logo"
-            width={250}
-            height={250}
+            width={400}
+            height={400}
             
           />
           <h1 className="text-6xl font-semibold tracking-wide font-lostinsouth ">
