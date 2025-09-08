@@ -110,12 +110,21 @@ export default function Navbar() {
           </div>
         </DialogContent>
       </Dialog>
+      {/* Overlay */}
+{isMobileMenuOpen && (
+  <div
+    className="fixed inset-0 bg-black/60  z-50"
+    onClick={() => setIsMobileMenuOpen(false)}
+  />
+)}
       {/* Slide-in drawer menu from left */}
       <div
         className={`fixed top-0 left-0 h-full w-64 bg-white text-black font-bold  z-50 transform transition-transform duration-300 ${
             isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
+        onClick={e => e.stopPropagation()}
       >
+        
         <div className="flex flex-col p-6 space-y-4">
           <button
             className="self-end text-3xl text-gold focus:outline-none"
@@ -145,6 +154,7 @@ export default function Navbar() {
               {label}
             </Link>
           ))}
+          
 
           <div className="flex items-center gap-2 mt-8">
             <SocialMedia className="text-black" />
