@@ -32,12 +32,12 @@ export const translations = {
   },
   footer: {
     address:{
-      en: "Address will be given after booked appointment",
-      fr: "L'adresse sera donnée après la réservation du rendez-vous",
+       en: "St-Leonard,\nQC H1R 1G4",
+       fr: "St-Léonard,\nQC H1R 1G4",
     },
     phone:{
-      en: "Phone Number",
-      fr: "Numéro de Téléphone",
+      en: "Phone",
+      fr: "Téléphone",
     },
     location:{
       en: "Location",
