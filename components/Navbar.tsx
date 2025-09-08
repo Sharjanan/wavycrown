@@ -59,13 +59,13 @@ const handleLanguageChange = () => {
           </button>
 
           {/* Centered logo */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 mb-10">
+          <div className="fixed left-1/2 transform -translate-x-1/2 md:mb-10 md:mt-5">
             <Link href="/">
               <Image
                 src="/sky_avenue_black_bg.png"
                 alt="WavyCrown Logo"
-                width={300}
-                height={300}
+                width={256}
+                height={256}
                 className="cursor-pointer"
               />
             </Link>
