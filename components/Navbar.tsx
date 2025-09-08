@@ -15,6 +15,18 @@ export default function Navbar() {
   const { lang, setLang } = useLanguage();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const t = translations.home;
+  const [isFading, setIsFading] = useState(false);
+
+const handleLanguageChange = () => {
+  setIsFading(true);
+  setTimeout(() => {
+    setLang(lang === "en" ? "fr" : "en");
+    setIsFading(false);
+    setTimeout(() => {
+      setIsMobileMenuOpen(false);
+    }, 100); // Small delay to let content fade in before closing menu
+  }, 300); // 200ms fade duration
+};
   const navLinks = [
     // { href: "/calendar", label: "Calendar" },
 
@@ -61,7 +73,7 @@ export default function Navbar() {
 
           {/* CTA Button - top right */}
           <div className={`z-50 gap-1 hidden md:flex md:items-center ${isMobileMenuOpen ? "invisible" : "visible"}`}>
-      
+
             <SocialMedia className="text-white" />
             <Button variant="gold" size="pill" onClick={() => setOpen(true)}>
               {t.button[lang].split("\n").map((line, i) => (
@@ -109,21 +121,20 @@ export default function Navbar() {
         </DialogContent>
       </Dialog>
       {/* Overlay */}
-{isMobileMenuOpen && (
-  <div
-    className="fixed inset-0 bg-black/60  z-50"
-    onClick={() => setIsMobileMenuOpen(false)}
-  />
-)}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/60  z-50"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
       {/* Slide-in drawer menu from left */}
       <div
-        className={`fixed top-0 left-0 h-full w-64 bg-white text-black font-bold  z-50 transform transition-transform duration-300 ${
-            isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`fixed top-0 left-0 h-full w-64 bg-white text-black font-bold  z-50 transform transition-transform duration-300 ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
         onClick={e => e.stopPropagation()}
       >
-        
-        <div className="flex flex-col p-6 space-y-4">
+
+        <div   className={`flex flex-col p-6 space-y-4 transition-opacity duration-200 ${isFading ? "opacity-0" : "opacity-100"}`}>
           <button
             className="self-end text-3xl text-gold focus:outline-none"
             onClick={() => setIsMobileMenuOpen(false)}
@@ -152,18 +163,18 @@ export default function Navbar() {
               {label}
             </Link>
           ))}
-          
+
 
           <div className="flex items-center gap-2 mt-8">
             <SocialMedia className="text-black" />
           </div>
           <div className="mt-auto flex justify-center">
-          <button
-            onClick={() => setLang(lang === "en" ? "fr" : "en")}
-            className="text-3xl rounded hover:text-gold transition font-lostinsouth"
-          >
-            {lang === "en" ? "Français" : "English"}
-          </button>
+            <button
+              onClick={handleLanguageChange}
+              className="text-3xl rounded hover:text-gold transition font-lostinsouth"
+            >
+              {lang === "en" ? "Français" : "English"}
+            </button>
           </div>
         </div>
       </div>
