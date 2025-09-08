@@ -25,27 +25,29 @@ export default function Footer() {
     </div>
     
     {/* Left: Address + Phone */}
-    <div className="flex items-center md:items-start space-y-3 order-2 md:order-1 border-t-2 border-gold pt-5 md:border-t-0">
-      <div className="flex gap-2">
-        <LocationHome className="text-gold w-10 h-10 md:w-16 md:h-16" />
-        <div className="flex flex-col">
-          <h2 className="text-xl md:text-2xl font-bold mb-2">{f.location[lang]}</h2>
-          <p className="text-white">{f.address[lang]}</p>
-        </div>
-      </div>
-      <div className="flex gap-2">
-        <Telephone className="text-gold w-8 h-8 md:w-12 md:h-12" />
-        <div className="flex flex-col">
-          <h2 className="text-xl md:text-2xl font-bold white-space:nowrap flex-shrink-0 ">{f.phone[lang]}</h2>
-          <a
-            href="tel:+15149249154"
-            className="text-white white-space:nowrap flex-shrink-0  hover:bg-gold hover:text-black px-2 py-1 rounded"
-          >
-            (514) 924-9154
-          </a>
-        </div>
-      </div>
+   <div className="flex items-center gap-6 order-2 md:order-1 border-t-2 border-gold pt-5 md:border-t-0">
+  {/* Address */}
+  <div className="flex py-4 gap-2 items-center">
+    <LocationHome className="text-gold w-10 h-10 md:w-16 md:h-16" />
+    <div className="flex flex-col">
+      <h2 className="text-xl md:text-2xl font-bold mb-2">{f.location[lang]}</h2>
+      <p className="text-white">{f.address[lang]}</p>
     </div>
+  </div>
+  {/* Phone */}
+  <div className="flex gap-2 items-center">
+    <Telephone className="text-gold w-6 h-6 md:w-7 md:h-7" />
+    <div className="flex flex-col">
+      <h2 className="text-xl md:text-2xl font-bold whitespace-nowrap flex-shrink-0">{f.phone[lang]}</h2>
+      <a
+        href="tel:+15149249154"
+        className="text-white whitespace-nowrap flex-shrink-0 hover:bg-gold hover:text-black px-2 py-1 rounded"
+      >
+        (514) 924-9154
+      </a>
+    </div>
+  </div>
+</div>
 
     {/* Right: Social Media */}
     <div className="flex justify-center md:justify-end order-3 border-t-2 border-gold pt-5  md:border-t-0">
