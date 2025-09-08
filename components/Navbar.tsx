@@ -9,23 +9,22 @@ import { translations } from "@/components/lang";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { SocialMedia } from "./ui/SocialMedia";
+import LoadingScreen from "@/components/LoadingScreen"; // adjust path if needed
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { lang, setLang } = useLanguage();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const t = translations.home;
-  const [isFading, setIsFading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
 const handleLanguageChange = () => {
-  setIsFading(true);
+  setLoading(true); // 1. Show loading
+  setLang(lang === "en" ? "fr" : "en"); // 2. Change language immediately
+    setIsMobileMenuOpen(false); // 3. Close menu after 1s
   setTimeout(() => {
-    setLang(lang === "en" ? "fr" : "en");
-    setIsFading(false);
-    setTimeout(() => {
-      setIsMobileMenuOpen(false);
-    }, 100); // Small delay to let content fade in before closing menu
-  }, 300); // 200ms fade duration
+    setLoading(false);          // 4. Hide loading
+  }, 1000);
 };
   const navLinks = [
     // { href: "/calendar", label: "Calendar" },
@@ -34,6 +33,7 @@ const handleLanguageChange = () => {
   ];
   return (
     <>
+     {loading && <LoadingScreen  />}
       <header
         className={`fixed top-0 left-0 py-10 w-full h-40 bg-black text-gold z-50 transition-transform  border-b border-gold `}
       >
@@ -129,12 +129,12 @@ const handleLanguageChange = () => {
       )}
       {/* Slide-in drawer menu from left */}
       <div
-        className={`fixed top-0 left-0 h-full w-64 bg-white text-black font-bold  z-50 transform transition-transform duration-300 ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+        className={`fixed top-0 left-0 h-full w-64 bg-white text-black font-bold  z-70 transform transition-transform duration-300 ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         onClick={e => e.stopPropagation()}
       >
 
-        <div   className={`flex flex-col p-6 space-y-4 transition-opacity duration-200 ${isFading ? "opacity-0" : "opacity-100"}`}>
+        <div   className={"flex flex-col p-6 space-y-4 transition-opacity duration-200"}>
           <button
             className="self-end text-3xl text-gold focus:outline-none"
             onClick={() => setIsMobileMenuOpen(false)}
