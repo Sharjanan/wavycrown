@@ -23,7 +23,7 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 py-10 w-full bg-black text-gold z-50 transition-transform  border-b border-gold `}
+        className={`fixed top-0 left-0 py-10 w-full h-40 bg-black text-gold z-50 transition-transform  border-b border-gold `}
       >
         <div className="flex items-center justify-between w-full px-4 py-3 relative">
           {/* Hamburger - always visible on left */}
@@ -60,10 +60,8 @@ export default function Navbar() {
           </div>
 
           {/* CTA Button - top right */}
-          <div className={`z-50 gap-1 ${
-          isMobileMenuOpen ? "hidden" : " hidden md:flex md:items-center"
-        }`}
-      >
+          <div className={`z-50 gap-1 hidden md:flex md:items-center ${isMobileMenuOpen ? "invisible" : "visible"}`}>
+      
             <SocialMedia className="text-white" />
             <Button variant="gold" size="pill" onClick={() => setOpen(true)}>
               {t.button[lang].split("\n").map((line, i) => (
