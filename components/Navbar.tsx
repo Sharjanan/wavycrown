@@ -50,7 +50,7 @@ export default function Navbar() {
           <div className="absolute left-1/2 transform -translate-x-1/2 mb-10">
             <Link href="/">
               <Image
-                src="/sky_distric_black_bg.png"
+                src="/sky_avenue_black_bg.png"
                 alt="WavyCrown Logo"
                 width={250}
                 height={250}
@@ -87,7 +87,7 @@ export default function Navbar() {
             book your session
           </h2>
           <Image
-            src="/sky_distric_black_bg.png"
+            src="/sky_avenue_black_bg.png"
             alt="WavyCrown Logo"
             width={250}
             height={250}
@@ -113,7 +113,7 @@ export default function Navbar() {
       {/* Slide-in drawer menu from left */}
       <div
         className={`fixed top-0 left-0 h-full w-64 bg-white text-black font-bold  z-50 transform transition-transform duration-300 ${
-          isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+            isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         <div className="flex flex-col p-6 space-y-4">
@@ -127,7 +127,7 @@ export default function Navbar() {
           {/* Logo inside drawer (optional, can remove if redundant) */}
           <Link href="/">
             <Image
-              src="/sky_distric_white_bg.png"
+              src="/sky_avenue_white_bg.png"
               alt="WavyCrown Logo"
               width={250}
               height={250}
@@ -140,7 +140,7 @@ export default function Navbar() {
               key={href}
               href={href}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="hover:text-gold  text-5xl font-lostinsouth"
+              className="hover:text-gold text-5xl font-lostinsouth"
             >
               {label}
             </Link>

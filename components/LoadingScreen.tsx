@@ -50,7 +50,7 @@ export default function LoadingScreen() {
             className="-mb-30"
           />
            <Image
-            src="/sky_distric_black_bg.png"
+            src="/sky_avenue_black_bg.png"
             alt="WavyCrown Logo"
             width={250}
             height={250}
