@@ -25,7 +25,7 @@ export default function Footer() {
     </div>
     
     {/* Left: Address + Phone */}
-   <div className="flex items-center gap-6 order-2 md:order-1 border-t-2 border-gold pt-5 md:border-t-0">
+   <div className="flex  gap-6 order-2 md:order-1 border-t-2 border-gold pt-5 md:flex-col md:border-t-0">
   {/* Address */}
   <div className="flex py-4 gap-2 items-center">
     <LocationHome className="text-gold w-10 h-10 md:w-16 md:h-16" />
@@ -36,7 +36,7 @@ export default function Footer() {
   </div>
   {/* Phone */}
   <div className="flex gap-2 items-center">
-    <Telephone className="text-gold w-6 h-6 md:w-7 md:h-7" />
+    <Telephone className="text-gold w-10 h-10 md:w-10 md:h-10" />
     <div className="flex flex-col">
       <h2 className="text-xl md:text-2xl font-bold whitespace-nowrap flex-shrink-0">{f.phone[lang]}</h2>
       <a
