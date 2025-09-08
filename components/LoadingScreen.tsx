@@ -40,20 +40,20 @@ export default function LoadingScreen() {
             duration: 4.8,
             times: [0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9],
           }}
-          className="min-h-screen bg-black flex flex-col items-center justify-center text-white"
+          className="fixed inset-0 z-[9999] min-h-screen bg-black flex flex-col items-center justify-center text-white"
         >
           <Image
             src="/wavycrown.png"
             alt="WavyCrown Logo"
-            width={500}
-            height={500}
-            className="-mb-30"
+            width={400}
+            height={400}
+            className="-mb-40"
           />
            <Image
-            src="/sky_distric_black_bg.png"
+            src="/sky_avenue_black_bg.png"
             alt="WavyCrown Logo"
-            width={250}
-            height={250}
+            width={400}
+            height={400}
             
           />
           <h1 className="text-6xl font-semibold tracking-wide font-lostinsouth ">

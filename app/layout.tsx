@@ -8,7 +8,7 @@ const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfa
 const poppins  = Poppins({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-poppins" });
 
 const lostInSouth = localFont({
-  src: "./fonts/LostInSouth.ttf",
+  src: "./fonts/Lost in South Regular.otf",
   variable: "--font-lostinsouth",
   display: "swap",
 });

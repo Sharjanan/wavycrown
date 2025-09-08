@@ -149,7 +149,7 @@ const schedule = titleWords.at(-1);
               <p className="text italic text-gray-300">
                 {service.description}
               </p>
-              <p className="text-gray-500 text-3xl mt-3">{service.price}</p>
+              <p className="text-gold-500 text-6xl mt-3 font-lostinsouth ">{service.price}</p>
               <div className="z-50 mt-20">            
               <button 
                className="text-xs sm:text-sm md:text-base text-black bg-gold glow-gold px-6 py-2  font-bold rounded-2xl  uppercase"
