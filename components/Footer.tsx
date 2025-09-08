@@ -27,16 +27,28 @@ export default function Footer() {
     {/* Left: Address + Phone */}
    <div className="flex  gap-6 order-2 md:order-1 border-t-2 border-gold pt-5 md:flex-col md:border-t-0">
   {/* Address */}
-  <div className="flex py-4 gap-2 items-center">
-    <LocationHome className="text-gold w-10 h-10 md:w-16 md:h-16" />
+  <div className="flex  flex-1 py-4 gap-2 items-center">
+    <LocationHome className="text-gold w-10 h-10 md:w-13 md:h-13" />
     <div className="flex flex-col">
       <h2 className="text-xl md:text-2xl font-bold mb-2">{f.location[lang]}</h2>
-      <p className="text-white">{f.address[lang]}</p>
+      <a
+  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(f.address[lang].replace('\n', ' '))}`}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="text-white whitespace-nowrap hover:text-gold underline"
+>
+  {f.address[lang].split('\n').map((line, i) => (
+    <span key={i}>
+      {line}
+      <br />
+    </span>
+  ))}
+</a>
     </div>
   </div>
   {/* Phone */}
-  <div className="flex gap-2 items-center">
-    <Telephone className="text-gold w-10 h-10 md:w-10 md:h-10" />
+  <div className="flex  flex-1 gap-2 items-center md:pl-2 ">
+    <Telephone className="text-gold w-10 h-10 md:w-10 md:h-10 " strokeWidth={2}  />
     <div className="flex flex-col">
       <h2 className="text-xl md:text-2xl font-bold whitespace-nowrap flex-shrink-0">{f.phone[lang]}</h2>
       <a
