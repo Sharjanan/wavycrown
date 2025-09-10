@@ -9,20 +9,32 @@ import { translations } from "@/components/lang";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { SocialMedia } from "./ui/SocialMedia";
+import LoadingScreen from "@/components/LoadingScreen"; // adjust path if needed
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { lang, setLang } = useLanguage();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const t = translations.home;
+  const [loading, setLoading] = useState(false);
+
+const handleLanguageChange = () => {
+  setLoading(true); // 1. Show loading
+  setLang(lang === "en" ? "fr" : "en"); // 2. Change language immediately
+    setIsMobileMenuOpen(false); // 3. Close menu after 1s
+  setTimeout(() => {
+    setLoading(false);          // 4. Hide loading
+  }, 1000);
+};
   const navLinks = [
     { href: "/housecall", label: "House Call" },
     { href: "#booking", label: lang === "en" ? "Book Now" : "Réserver" },
   ];
   return (
     <>
+     {loading && <LoadingScreen  />}
       <header
-        className={`fixed top-0 left-0 py-10 w-full bg-black text-gold z-50 transition-transform  border-b border-gold `}
+        className={`fixed top-0 left-0 py-10 w-full h-40 bg-black text-gold z-50 transition-transform  border-b border-gold `}
       >
         <div className="flex items-center justify-between w-full px-4 py-3 relative">
           {/* Hamburger - always visible on left */}
@@ -46,23 +58,21 @@ export default function Navbar() {
           </button>
 
           {/* Centered logo */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 mb-10">
+          <div className="fixed left-1/2 transform -translate-x-1/2 md:mb-10 md:mt-5">
             <Link href="/">
               <Image
-                src="/sky_distric_black_bg.png"
+                src="/sky_avenue_black_bg.png"
                 alt="WavyCrown Logo"
-                width={250}
-                height={250}
+                width={256}
+                height={256}
                 className="cursor-pointer"
               />
             </Link>
           </div>
 
           {/* CTA Button - top right */}
-          <div className={`z-50 gap-1 ${
-          isMobileMenuOpen ? "hidden" : " hidden md:flex md:items-center"
-        }`}
-      >
+          <div className={`z-50 gap-1 hidden md:flex md:items-center ${isMobileMenuOpen ? "invisible" : "visible"}`}>
+
             <SocialMedia className="text-white" />
             <Button variant="gold" size="pill" onClick={() => setOpen(true)}>
               {t.button[lang].split("\n").map((line, i) => (
@@ -86,7 +96,7 @@ export default function Navbar() {
             book your session
           </h2>
           <Image
-            src="/sky_distric_black_bg.png"
+            src="/sky_avenue_black_bg.png"
             alt="WavyCrown Logo"
             width={250}
             height={250}
@@ -109,13 +119,21 @@ export default function Navbar() {
           </div>
         </DialogContent>
       </Dialog>
+      {/* Overlay */}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/60  z-50"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
       {/* Slide-in drawer menu from left */}
       <div
-        className={`fixed top-0 left-0 h-full w-64 bg-white text-black font-bold  z-50 transform transition-transform duration-300 ${
-          isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`fixed top-0 left-0 h-full w-64 bg-white text-black font-bold  z-70 transform transition-transform duration-300 ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
+        onClick={e => e.stopPropagation()}
       >
-        <div className="flex flex-col p-6 space-y-4">
+
+        <div   className={"flex flex-col p-6 space-y-4 transition-opacity duration-200"}>
           <button
             className="self-end text-3xl text-gold focus:outline-none"
             onClick={() => setIsMobileMenuOpen(false)}
@@ -124,37 +142,38 @@ export default function Navbar() {
           </button>
 
           {/* Logo inside drawer (optional, can remove if redundant) */}
-          <Link href="/">
-            <Image
-              src="/sky_distric_white_bg.png"
-              alt="WavyCrown Logo"
-              width={250}
-              height={250}
-              className="cursor-pointer"
-            />
-          </Link>
+         <Link href="/">
+  <Image
+    src="/sky_avenue_white_bg.png"
+    alt="WavyCrown Logo"
+    width={300}
+    height={300}
+    className="cursor-pointer w-full h-auto max-w-xs mx-auto"
+  />
+</Link>
 
           {navLinks.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="hover:text-gold  text-5xl font-lostinsouth"
+              className="hover:text-gold text-5xl font-lostinsouth"
             >
               {label}
             </Link>
           ))}
 
+
           <div className="flex items-center gap-2 mt-8">
             <SocialMedia className="text-black" />
           </div>
           <div className="mt-auto flex justify-center">
-          <button
-            onClick={() => setLang(lang === "en" ? "fr" : "en")}
-            className="text-3xl rounded hover:text-gold transition font-lostinsouth"
-          >
-            {lang === "en" ? "Français" : "English"}
-          </button>
+            <button
+              onClick={handleLanguageChange}
+              className="text-3xl rounded hover:text-gold transition font-lostinsouth"
+            >
+              {lang === "en" ? "Français" : "English"}
+            </button>
           </div>
         </div>
       </div>

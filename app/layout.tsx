@@ -16,7 +16,7 @@ const poppins = Poppins({
 });
 
 const lostInSouth = localFont({
-  src: "./fonts/LostInSouth.ttf",
+  src: "./fonts/Lost in South Regular.otf",
   variable: "--font-lostinsouth",
   display: "swap",
 });
