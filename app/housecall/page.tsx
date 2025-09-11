@@ -56,8 +56,8 @@ export default function HousecallPage() {
       {/* Next button pinned near bottom */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
         <Button
-          className="px-40 py-3  font-semibold z-70"
-          variant="mapButton" size="pill"
+          className="px-40 py-3  font-semibold "
+          variant="gold" size="pill"
           onClick={() => setDrawerOpen(true)}
         >
           Next
@@ -120,8 +120,8 @@ export default function HousecallPage() {
             </div>
     </label>
     <Button
-      className="mt-6 px-6 py-3 rounded-xl font-semibold bg-gold text-black hover:bg-black hover:text-gold transition-colors shadow-lg"
-      // onClick={...} // handle continue
+      className="mt-6 px-6 py-3 rounded-xl font-semibold"
+      variant="gold" size="pill"
     >
       Continue
     </Button>
