@@ -57,7 +57,7 @@ body {
 
 .bg-gold:hover {
   color: white;
-  background-color:transparent;
+  background-color:black;
   border-color: #F4CD8A;
 }
 
