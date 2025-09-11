@@ -1,21 +1,51 @@
 // app/housecall/HousecallMap.tsx
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Map, { Marker, MapRef } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { LocationUserSolid as LocationIcon } from '@mynaui/icons-react';
-
+import type { StyleSpecification } from 'maplibre-gl';
 type Props = {
   coords: { lat: number; lng: number } | null;
 };
 
 export default function HousecallMap({ coords }: Props) {
   const mapRef = useRef<MapRef | null>(null);
+  const [mounted, setMounted] = useState(false);
   const [ready, setReady] = useState(false);
+
+  useEffect(() => setMounted(true), []);
 
   const initial = coords ?? { lat: 45.5019, lng: -73.5674 };
 
+  // ✅ Memoize the style so MapLibre doesn’t receive a fresh object each render
+  const rasterStyle = useMemo(
+    () => ({
+      version: 8 as const,
+      sources: {
+        cartoLight: {
+          type: 'raster',
+          tiles: [
+            'https://cartodb-basemaps-a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',
+          ],
+          tileSize: 256,
+          attribution:
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
+        },
+      },
+      layers: [
+        {
+          id: 'cartoLight',
+          type: 'raster',
+          source: 'cartoLight',
+        },
+      ],
+    } as StyleSpecification),
+    []
+  )
+
+  // ✅ Only fly after the map has fully loaded
   useEffect(() => {
     if (!ready || !coords || !mapRef.current) return;
     const map = mapRef.current.getMap();
@@ -29,6 +59,8 @@ export default function HousecallMap({ coords }: Props) {
     });
   }, [coords, ready]);
 
+  if (!mounted) return null;
+
   return (
     <Map
       ref={mapRef}
@@ -38,27 +70,7 @@ export default function HousecallMap({ coords }: Props) {
         zoom: 10,
       }}
       style={{ width: '100%', height: '100%' }}
-      mapStyle={{
-        version: 8,
-        sources: {
-          cartoLight: {
-            type: 'raster',
-            tiles: [
-              'https://cartodb-basemaps-a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',
-            ],
-            tileSize: 256,
-            attribution:
-              '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
-          },
-        },
-        layers: [
-          {
-            id: 'cartoLight',
-            type: 'raster',
-            source: 'cartoLight',
-          },
-        ],
-      }}
+      mapStyle={rasterStyle}
       attributionControl={false}
       onLoad={() => setReady(true)}
     >
