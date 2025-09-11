@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
+    "@material-tailwind/react": "^2.1.10",
     "@mynaui/icons-react": "^0.3.9",
     "@radix-ui/react-dialog": "^1.1.13",
     "@radix-ui/react-dropdown-menu": "^2.1.14",
@@ -17,19 +19,23 @@
     "@react-google-maps/api": "^2.20.7",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "framer-motion": "^12.10.5",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.509.0",
     "maplibre-gl": "^5.7.0",
     "next": "15.3.2",
+    "preline": "^3.2.3",
     "react": "^19.0.0",
     "react-calendar": "^5.1.0",
+    "react-day-picker": "^9.9.0",
     "react-dom": "^19.0.0",
     "react-leaflet": "^5.0.0",
     "react-map-gl": "^8.0.4",
     "square": "^43.0.1",
     "tailwind-merge": "^3.3.0",
-    "tw-elements-react": "^1.0.0-alpha-end"
+    "tw-elements-react": "^1.0.0-alpha-end",
+    "vanilla-calendar-pro": "^3.0.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

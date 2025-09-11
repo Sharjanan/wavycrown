@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @plugin "tw-elements-react/dist/plugin.cjs";
 @import "leaflet/dist/leaflet.css";
+
+
+
+
 .hero-bg {
   background-image: url("/sky_2.jpg");
   background-size: cover;

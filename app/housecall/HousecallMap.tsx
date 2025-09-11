@@ -14,9 +14,8 @@ export default function HousecallMap({ coords }: Props) {
   const mapRef = useRef<MapRef | null>(null);
   const [ready, setReady] = useState(false);
 
-  const initial = coords ?? { lat: 45.5603913, lng: -73.6679773 };
+  const initial = coords ?? { lat: 45.5019, lng: -73.5674 };
 
-  // Only fly after map has loaded
   useEffect(() => {
     if (!ready || !coords || !mapRef.current) return;
     const map = mapRef.current.getMap();
@@ -26,32 +25,48 @@ export default function HousecallMap({ coords }: Props) {
       speed: 1.2,
       curve: 1,
       essential: true,
-       padding: { top: 200, bottom: 0, left: 0, right: 0 }, 
+      padding: { top: 200 },
     });
   }, [coords, ready]);
 
   return (
-    <div className="w-full h-full">
-      <Map
-        ref={mapRef}
-        initialViewState={{
-          longitude: initial.lng,
-          latitude: initial.lat,
-          zoom: 9,
-        }}
-        mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
-        attributionControl={false}
-        onLoad={() => setReady(true)}   // ✅ safe to interact
-        reuseMaps                       // avoids multiple mounts in dev
-      >
-        {coords && (
-          <Marker longitude={coords.lng} latitude={coords.lat} anchor="bottom">
-            <div className="drop-pin flex items-center justify-center">
-              <LocationIcon size={50} strokeWidth={3} className="text-red-400" />
-            </div>
-          </Marker>
-        )}
-      </Map>
-    </div>
+    <Map
+      ref={mapRef}
+      initialViewState={{
+        longitude: initial.lng,
+        latitude: initial.lat,
+        zoom: 10,
+      }}
+      style={{ width: '100%', height: '100%' }}
+      mapStyle={{
+        version: 8,
+        sources: {
+          cartoLight: {
+            type: 'raster',
+            tiles: [
+              'https://cartodb-basemaps-a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',
+            ],
+            tileSize: 256,
+            attribution:
+              '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
+          },
+        },
+        layers: [
+          {
+            id: 'cartoLight',
+            type: 'raster',
+            source: 'cartoLight',
+          },
+        ],
+      }}
+      attributionControl={false}
+      onLoad={() => setReady(true)}
+    >
+      {coords && (
+        <Marker longitude={coords.lng} latitude={coords.lat} anchor="bottom">
+          <LocationIcon className="w-8 h-8 text-red-500" />
+        </Marker>
+      )}
+    </Map>
   );
 }

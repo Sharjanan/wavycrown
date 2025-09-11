@@ -30,7 +30,9 @@ const buttonVariants = cva(
         gold:
           // solid gold, black text, rounded-2xl + glow
           "bg-gold text-black rounded-2xl uppercase font-bold px-6 py-2 glow-gold hover:bg-gold/90",
-
+        mapButton:
+          "bg-gold text-black rounded-2xl uppercase font-bold px-6 py-2 glow-gold hover:bg-gold/90 hover:text-black",
+      
         goldOutline:
           // transparent bg, gold text/border, hover invert
           "rounded-2xl uppercase font-bold px-6 py-2 border border-gold text-gold hover:bg-gold hover:text-black glow-gold/50",
