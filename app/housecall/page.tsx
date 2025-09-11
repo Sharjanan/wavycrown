@@ -7,6 +7,8 @@ import AddressForm from './AddressForm';
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
+import { Datepicker } from "flowbite-react";
+
 const HousecallMap = dynamic(() => import('./HousecallMap'), { ssr: false });
 
 export default function HousecallPage() {
@@ -89,13 +91,18 @@ export default function HousecallPage() {
   <div className="p-8 flex flex-col gap-6">
     <h2 className="text-2xl font-bold text-gold mb-4">Step 2: Booking Details</h2>
     <label className="text-black font-semibold">
-      Preferred Date *
-      <input className="hs-datepicker py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-600 focus:ring-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder:text-neutral-400 dark:focus:border-blue-500 dark:focus:ring-neutral-500" 
-      type="text" 
-      placeholder="Select day"
-       
-       />
-    </label>
+            Preferred Date *
+            <div className="relative max-w-sm">
+  <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+    <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+      <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+    </svg>
+  </div>
+ <Datepicker
+      className="w-full rounded-lg border border-gray-300 text-sm text-black focus:ring-gold focus:border-gold"
+      placeholder="Select date"
+    /></div>
+          </label>
     <label className="text-black font-semibold">
       Preferred Hours *
       <div className="grid grid-cols-2 gap-4">

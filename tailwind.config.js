@@ -4,19 +4,20 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
+
+    // 👇 Add these two lines for Flowbite
+    "node_modules/flowbite-react/lib/esm/**/*.js",
+    "node_modules/flowbite/**/*.js",
   ],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ["var(--font-poppins)"],      // maps to Poppins
-        display: ["var(--font-playfair)"], // maps to Playfair
-      lostinsouth: ["var(--font-lostinsouth)"], // maps to Lost in South
-      },
       colors: {
         gold: "#F4CD8A",
         black: "#0a0a0a",
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require("flowbite/plugin"), // 👈 required
+  ],
 };
